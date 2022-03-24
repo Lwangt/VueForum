@@ -35,7 +35,8 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss" scoped>
+
 .head-post{
   position: relative;
   width:100%;

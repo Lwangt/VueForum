@@ -218,7 +218,6 @@
   &::before{
     height: 13px;
     width: 7px;
-    background: url('~@/assets/common/work-bench-back.png') no-repeat;
     background-size: 100%;
     margin-right: 10px;
   }
@@ -237,7 +236,7 @@
   .emoji:hover{
     background-color: #f0f0f0;
   }
-  /deep/ .el-popover {
+  ::v-deep .el-popover {
       display: inline-block;
       width: 35px;
       height: 18px;

@@ -60,7 +60,21 @@ exports.cssLoaders = function (options) {
     postcss: generateLoaders(),
     less: generateLoaders('less'),
     sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
+    scss: generateLoaders('sass').concat({
+      loader:'sass-resources-loader',
+      options:{
+        resources:[
+          path.resolve(__dirname,'../src/style/common.scss'),
+          path.resolve(__dirname,'../src/style/conf.scss'),
+          path.resolve(__dirname,'../src/style/flex.scss'),
+          path.resolve(__dirname,'../src/style/function.scss'),
+          path.resolve(__dirname,'../src/style/rest.scss'),
+          path.resolve(__dirname,'../src/style/ui.scss'),
+          path.resolve(__dirname,'../src/style/utils.scss'),
+          path.resolve(__dirname,'../src/style/variables.scss')
+        ]
+      }
+    }),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   }
