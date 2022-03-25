@@ -21,7 +21,9 @@ export default {
     }
   },
   data () {
+    return{
 
+    }
   },
   methods: {
     closeMyself () {

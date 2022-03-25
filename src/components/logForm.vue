@@ -22,6 +22,9 @@
 </template>
 
 <script>
+
+import {loginUrl} from "../services/login";
+
 export default {
   data () {
     return {
@@ -84,8 +87,26 @@ export default {
     // }
   },
   methods: {
-    onLogin () {
+    async onLogin () {
+      try {
+        let { data: { data, code, message } } = await loginUrl({
+           formData
+        })
+        if (code == 0) {
+          this.$emit('ok')
+          //关闭弹窗
+          this.dialogVisible = false
+          return
+        }
+        else {
+          this.$message.error(message)
+          return
+        }
+      } catch (e) {
+        console.log(e)
+      } finally {
 
+      }
     },
     onCancel () {
 
