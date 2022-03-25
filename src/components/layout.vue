@@ -4,10 +4,10 @@
       <div class="app-head-inner">
         <router-link :to="{path: '/'}">
           <img src="../assets/name.png" width="30px">
-         </router-link> 
-         
+         </router-link>
+
         <div class="sBar"  ><search-bar></search-bar></div>
-         
+
         <div class="head-nav">
           <ul class="nav-list">
             <li v-if=" username!=='' "> {{ username }} </li>
@@ -20,28 +20,28 @@
             <li @click="aboutClick">关于本站</li>
             <li class="nav-pile">|</li>
           </ul>
-        </div>  
+        </div>
       </div>
     </div>
     <poster v-if="showPost" @closePost="closePost"></poster>
     <div class="container">
-      
+
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
-      
+
     </div>
     <div class="app-foot">
-      <p>© All designed By 德布脑内</p>
+      <p>© All designed By 挨踢社区</p>
     </div>
-    <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
-      hello about
-    </my-dialog>
     <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
       <log-form @has-log="onSuccessLog"></log-form>
     </my-dialog>
     <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
       <reg-form></reg-form>
+    </my-dialog>
+    <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
+      hello about
     </my-dialog>
   </div>
 </template>
@@ -110,8 +110,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   font-family: inherit;
@@ -123,7 +123,7 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
@@ -171,7 +171,7 @@ body {
   height: 90px;
   line-height: 90px;
   width: 100%;
-  border-top: 3px solid #408080; 
+  border-top: 3px solid #408080;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 
 }
@@ -244,6 +244,7 @@ body {
 }
 .g-form-input {
   display: inline-block;
+  border-radius: 5px;
 }
 .g-form-input input {
   height: 30px;
@@ -254,7 +255,7 @@ body {
   border: 1px solid #ccc;
 }
 .g-form-btn {
-  padding-left: 100px;
+  padding-left: 130px;
 }
 .g-form-error {
   color: red;

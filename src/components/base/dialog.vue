@@ -21,7 +21,7 @@ export default {
     }
   },
   data () {
-    
+
   },
   methods: {
     closeMyself () {
@@ -52,7 +52,6 @@ export default {
   height: 100%;
 }
 .dialog-cover {
-  background: #000;
   opacity: .3;
   position: fixed;
   z-index: 5;
@@ -62,23 +61,25 @@ export default {
   height: 100%;
 }
 .dialog-content {
-  width: 38%;
+  width: 45%;
   position: fixed;
   max-height: 70%;
-  height: 300px;
+  height: 270px;
   overflow: auto;
-  background: #fff;
+  background: #ffffff;
   top: 20%;
-  left: 50%;
+  left: 55%;
   margin-left: -25%;
   z-index: 10;
-  border: 2px solid #464068;
+  border-radius: 10px;
+  box-shadow: 0 14px 69px 0 rgba(0,0,0,0.37);
+  /*border: 2px solid #464068;*/
   padding: 2%;
   line-height: 1.6;
 }
 .dialog-close {
   position: absolute;
-  right: 5px;
+  right: 10px;
   top: 5px;
   width: 20px;
   height: 20px;
