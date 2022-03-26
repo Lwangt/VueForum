@@ -41,7 +41,7 @@
       <reg-form></reg-form>
     </my-dialog>
     <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
-      hello about
+      <AboutDialog></AboutDialog>
     </my-dialog>
   </div>
 </template>
@@ -50,6 +50,7 @@
 import Dialog from './base/dialog'
 import LogForm from './logForm'
 import RegForm from './regForm'
+import AboutDialog from  './aboutDialog'
 import searchBar from './searchBar'
 import poster from './poster'
 export default {
@@ -57,6 +58,7 @@ export default {
     MyDialog:Dialog,
     LogForm,
     RegForm,
+    AboutDialog,
     searchBar,
     poster
   },
