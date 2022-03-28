@@ -3,7 +3,7 @@
     <!--文章目录-->
     <el-card class="box-card m-toc toc-wrapper m-box">
       <div slot="header" class="d-flex align-items-center">
-<!--        <img class="card-icon" src="../assets/tag.png" />-->
+        <img class="card-icon" src="../assets/tag.png" />
         <span>本文目录</span>
       </div>
       <div class="item">

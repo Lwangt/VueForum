@@ -39,9 +39,12 @@
               <p class="abstract">关于博客页面测试的一句话</p>
             </div>
 
-            <div class="pl20" style="border-radius: 10px">
-              <div class="markdown-body">
-                <VueMarkdown :source="blog.blog_content" v-highlight></VueMarkdown>
+            <div class="js-toc-content">
+              <div class="pl20" style="border-radius: 10px">
+<!--                分析的文档区域-->
+                <div class="markdown-body">
+                  <VueMarkdown :source="blog.blog_content" v-highlight></VueMarkdown>
+                </div>
               </div>
             </div>
 
@@ -199,38 +202,38 @@ export default {
       },
       ...mapState(['siteInfo'])
 		},
-  // beforeRouteEnter(to, from, next) {
-	// 		//路由到博客文章页面之前，应将文章的渲染完成状态置为 false
-	// 		next(vm => {
-	// 			// 当 beforeRouteEnter 钩子执行前，组件实例尚未创建
-	// 			// vm 就是当前组件的实例，可以在 next 方法中把 vm 当做 this用
-	// 			vm.$store.dispatch('setIsBlogRenderComplete', false)
-	// 		})
-	// 	},
-  // beforeRouteLeave(to, from, next) {
-  //   // 从文章页面路由到其它页面时，销毁当前组件的同时，要销毁tocbot实例
-  //   // 否则tocbot一直在监听页面滚动事件，而文章页面的锚点已经不存在了，会报"Uncaught TypeError: Cannot read property 'className' of null"
-  //   tocbot.destroy()
-  //   next()
-  // },
-  // beforeRouteUpdate(to, from, next) {
-  //   // 一般有两种情况会触发这个钩子
-  //   // ①当前文章页面跳转到其它文章页面
-  //   // ②点击目录跳转锚点时，路由hash值会改变，导致当前页面会重新加载，这种情况是不希望出现的
-  //   // 在路由 beforeRouteUpdate 中判断路径是否改变
-  //   // 如果跳转到其它页面，to.path!==from.path 就放行 next()
-  //   // 如果是跳转锚点，path不会改变，hash会改变，to.path===from.path, to.hash!==from.path 不放行路由跳转，就能让锚点正常跳转
-  //   if (to.path !== from.path) {
-  //     this.getBlog(to.params.blogId)
-  //    // console.log(to.params.blogId)
-  //     //只要路由路径有改变，且停留在当前Blog组件内，就把文章的渲染完成状态置为 false
-  //     this.$store.dispatch('setIsBlogRenderComplete', false)
-  //     next()
-  //   }
-  // },
+  beforeRouteEnter(to, from, next) {
+			//路由到博客文章页面之前，应将文章的渲染完成状态置为 false
+			next(vm => {
+				// 当 beforeRouteEnter 钩子执行前，组件实例尚未创建
+				// vm 就是当前组件的实例，可以在 next 方法中把 vm 当做 this用
+				vm.$store.dispatch('setIsBlogRenderComplete', false)
+			})
+		},
+  beforeRouteLeave(to, from, next) {
+    // 从文章页面路由到其它页面时，销毁当前组件的同时，要销毁tocbot实例
+    // 否则tocbot一直在监听页面滚动事件，而文章页面的锚点已经不存在了，会报"Uncaught TypeError: Cannot read property 'className' of null"
+    tocbot.destroy()
+    next()
+  },
+  beforeRouteUpdate(to, from, next) {
+    // 一般有两种情况会触发这个钩子
+    // ①当前文章页面跳转到其它文章页面
+    // ②点击目录跳转锚点时，路由hash值会改变，导致当前页面会重新加载，这种情况是不希望出现的
+    // 在路由 beforeRouteUpdate 中判断路径是否改变
+    // 如果跳转到其它页面，to.path!==from.path 就放行 next()
+    // 如果是跳转锚点，path不会改变，hash会改变，to.path===from.path, to.hash!==from.path 不放行路由跳转，就能让锚点正常跳转
+    if (to.path !== from.path) {
+      this.getBlog(to.params.blogId)
+     // console.log(to.params.blogId)
+      //只要路由路径有改变，且停留在当前Blog组件内，就把文章的渲染完成状态置为 false
+      this.$store.dispatch('setIsBlogRenderComplete', false)
+      next()
+    }
+  },
   methods: {
     getBlog(blogId = this.blogId) {
-      // const _this = this;
+      const _this = this;
       // this.$axios.get("/blog/" + blogId).then(res => {
       //   // console.log(res.data.data)
       //   if(res.data.code===200){
@@ -244,8 +247,9 @@ export default {
       //   }
       //
       // });
-      // this.scrollToTop();
-      // // console.log(blogId);
+      this.$store.dispatch('setIsBlogRenderComplete', true)
+      this.scrollToTop();
+      // console.log(blogId);
     },
     setCookie(key, value, expiredays) {
       var exdate = new Date();
