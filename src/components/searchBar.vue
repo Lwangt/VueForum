@@ -31,7 +31,7 @@ export default {
     position:relative;
     display:inline-block;
     top:-27px;
-} 
+}
 .input-search{
     width:400px;
     height:50px;
@@ -40,7 +40,7 @@ export default {
     padding:20px;
     box-sizing:border-box;
     outline:none;
-    font-size:1.3em;
+    font-size:18px;
 }
 .btn-search{
     cursor:pointer;
@@ -55,6 +55,6 @@ export default {
 }
 .icon-search{
     width:30px;
-    height:30px; 
+    height:30px;
 }
 </style>

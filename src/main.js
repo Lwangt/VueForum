@@ -8,20 +8,39 @@ import IndexPage from './pages/IndexPage'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import DetailPage from './pages/detail'
-import DetailAnaPage from './pages/details/analysis'
-import DetailCountPage from './pages/details/count'
-import DetailPubPage from './pages/details/publish' 
-import DetailForPage from './pages/details/forecast'
+import DetailAnaPage from './pages/book_details/analysis'
+import DetailCountPage from './pages/book_details/count'
+import DetailPubPage from './pages/book_details/publish'
+import DetailForPage from './pages/book_details/forecast'
 import OrderListPage from './pages/orderList'
 import articalPage from './pages/articlePage'
 import jsPage from './pages/article/jsPage'
 import backPage from './pages/article/backPage'
 import aiPage from './pages/article/aiPage'
 import searchPage from './pages/searchPage'
+import ArticleDetailPage from './pages/article_detail/article_detail'
+
+import store from './store'
+
+import 'github-markdown-css/github-markdown.css'
+import hljs from 'highlight.js'
+
+// import mavonEditor from 'mavon-editor'
+// import 'mavon-editor/dist/css/index.css'
+
 // Vue.config.productionTip = false
 Vue.use(VRouter)
 Vue.use(VueResource)
 Vue.use(ElementUI)
+// Vue.use(mavonEditor)
+
+Vue.directive('highlight', function (el) {
+  const blocks = el.querySelectorAll('pre code')
+  blocks.forEach(block => {
+    hljs.highlightBlock(block)
+  })
+})
+
 let router=new VRouter({
   mode:'history',
   routes:[
@@ -78,6 +97,10 @@ let router=new VRouter({
   {
     path:'/search/:searchText',
     component:searchPage
+  },
+  {
+    path:'/articleDetail',
+    component:ArticleDetailPage
   }
 ]
 })
@@ -85,6 +108,7 @@ let router=new VRouter({
 new Vue({
   el: '#app',
   router,
+  store,
   components: { Layout },
   template: '<Layout/>'
 })

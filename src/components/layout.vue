@@ -23,7 +23,9 @@
         </div>
       </div>
     </div>
+
     <poster v-if="showPost" @closePost="closePost"></poster>
+
     <div class="container">
 
       <keep-alive>
