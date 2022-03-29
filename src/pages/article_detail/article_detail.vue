@@ -132,8 +132,8 @@
 
 <script>
 import {mapState} from "vuex";
-import Tocbot from "@/components/Tocbot";
-import commentList from '@/components/Comment';
+import Tocbot from "../../components/Tocbot";
+import commentList from '../../components/Comment';
 import VueMarkdown from 'vue-markdown'
 export default {
   name: "article_detail",

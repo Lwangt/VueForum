@@ -21,6 +21,7 @@ export default {
     ...mapState(["isBlogRenderComplete"])
   },
   mounted() {
+    this.initTocbot();
     // 有可能组件创建比较慢，文章渲染已经完成，watch的时候，isBlogRenderComplete已经是true，监听不到 isBlogRenderComplete 的改变，也就不会执行watch中的方法
     // 就需要在 mounted 中init
     if (this.isBlogRenderComplete) {
