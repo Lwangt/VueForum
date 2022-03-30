@@ -66,7 +66,6 @@ export default {
   width: 45%;
   position: fixed;
   max-height: 70%;
-  height: 270px;
   overflow: auto;
   background: #ffffff;
   top: 20%;

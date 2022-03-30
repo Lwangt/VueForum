@@ -13,7 +13,7 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="flex justify-content-center align-items-center mt50">
+    <div class="flex justify-content-center align-items-center mt50 mb10">
       <div ></div>
       <el-button @click="onCancel" round  size="medium" style="width: 98px">取消</el-button>
       <el-button @click="onLogin" round  size="medium" style="width: 98px;margin-left: 20px;background-color: #009a61;color: white">登录</el-button>
