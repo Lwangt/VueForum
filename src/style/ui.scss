@@ -306,3 +306,18 @@
     padding-right:50px;
   }
 }
+
+.el-button--primary{
+  color: #fff;
+  background-color: #009a61; ;
+  border-color: #009a61;
+}
+.el-button--primary:hover{
+  background-color: #79ddb8;
+  border-color: #79ddb8;
+}
+.el-button--primary:focus{
+  background-color: #79ddb8;
+  border-color: #79ddb8;
+}
+

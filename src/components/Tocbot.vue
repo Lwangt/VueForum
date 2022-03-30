@@ -1,10 +1,12 @@
 <template>
   <div class="tobcot">
     <!--文章目录-->
-    <el-card class="box-card m-toc toc-wrapper m-box">
+    <el-card class="box-card m-toc toc-wrapper m-box" style="border-radius: 12px">
       <div slot="header" class="d-flex align-items-center">
-        <img class="card-icon" src="../assets/tag.png" />
-        <span>本文目录</span>
+        <div class="flex align-items-center">
+          <img class="card-icon" src="../assets/tag.png" />
+          <span>文章目录</span>
+        </div>
       </div>
       <div class="item">
         <div class="js-toc"></div>
@@ -62,7 +64,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 
 .box-card:hover {
   transform: translate(0, -2px);
@@ -105,7 +107,7 @@ export default {
   font-weight: 300;
 }
 .toc-list li a:hover {
-  color: #409eff;
+  color: #1fa059;
 }
 a.toc-link {
   color: currentColor;
@@ -125,7 +127,7 @@ a.toc-link {
 }
 .is-active-link {
   font-weight: 700;
-  color: #409eff !important;
+  color: #1fa059 !important;
 }
 .toc-link::before {
   background-color: #eee;

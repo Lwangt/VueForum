@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <el-row id="artList" type="flex" justify="space-around">
+  <div >
+    <el-row  type="flex"  style="width: 100%">
       <el-col :span="screenWidth>750?20:28">
         <el-row class="art-item">
-          <el-card style="margin: 10px;">
+          <el-card style="margin: 10px;border-radius: 12px">
 
             <div id="artcle-info">
               <div class="font-weight-800 fs30" style="color: #3c3c3c;">我是一个标题</div>
@@ -63,33 +63,33 @@
                 <el-tooltip class="love" content="点赞" placement="top">
                   <img @click="LikeBlog" class="icon" src="../../assets/dianzan.png" alt />
                 </el-tooltip>
-                <el-popover placement="top" width="200" trigger="click">
-                  <el-avatar
-                    shape="square"
-                    :size="200"
-                    fit="fill"
-                    :src="$store.state.siteInfo"
-                  ></el-avatar>
-                  <svg
-                    slot="reference"
-                    style="width: 2.25em!important;height: 2.25em!important;"
-                    t="1614349031867"
-                    class="icon"
-                    viewBox="0 0 1024 1024"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    p-id="6413"
-                    width="200"
-                    height="200"
-                  >
-                    <path d="M427.2 444h169.6V480H427.2z" fill="#FF5500" p-id="6414" />
-                    <path
-                      d="M512 0C229.6 0 0 229.6 0 512s229.6 512 512 512 512-229.6 512-512S794.4 0 512 0zM319.2 359.2h86.4c-7.2-14.4-16-27.2-25.6-40l31.2-11.2c11.2 14.4 20.8 31.2 28.8 51.2h54.4V304h35.2v55.2H584c10.4-16.8 20-34.4 28-52l32 11.2c-6.4 13.6-14.4 27.2-24 40.8h84.8v92h-33.6v-63.2H352v64.8h-32.8V359.2z m82.4 202.4v99.2h-32.8V532H656v123.2h-32.8V561.6H401.6z m-6.4-57.6V420h234.4V504H395.2z m95.2 183.2c-24 22.4-78.4 36.8-161.6 42.4l-13.6-30.4c74.4-3.2 123.2-14.4 146.4-32 20.8-17.6 33.6-47.2 36.8-88l33.6 2.4c-6.4 52.8-20 87.2-41.6 105.6z m196.8 45.6c-53.6-24-108-42.4-164.8-56l16.8-24.8C600 665.6 656 683.2 706.4 704l-19.2 28.8z"
-                      fill="#FF5500"
-                      p-id="6415"
-                    />
-                  </svg>
-                </el-popover>
+<!--                <el-popover placement="top" width="200" trigger="click">-->
+<!--                  <el-avatar-->
+<!--                    shape="square"-->
+<!--                    :size="200"-->
+<!--                    fit="fill"-->
+<!--                    :src="$store.state.siteInfo"-->
+<!--                  ></el-avatar>-->
+<!--                  <svg-->
+<!--                    slot="reference"-->
+<!--                    style="width: 2.25em!important;height: 2.25em!important;"-->
+<!--                    t="1614349031867"-->
+<!--                    class="icon"-->
+<!--                    viewBox="0 0 1024 1024"-->
+<!--                    version="1.1"-->
+<!--                    xmlns="http://www.w3.org/2000/svg"-->
+<!--                    p-id="6413"-->
+<!--                    width="200"-->
+<!--                    height="200"-->
+<!--                  >-->
+<!--                    <path d="M427.2 444h169.6V480H427.2z" fill="#FF5500" p-id="6414" />-->
+<!--                    <path-->
+<!--                      d="M512 0C229.6 0 0 229.6 0 512s229.6 512 512 512 512-229.6 512-512S794.4 0 512 0zM319.2 359.2h86.4c-7.2-14.4-16-27.2-25.6-40l31.2-11.2c11.2 14.4 20.8 31.2 28.8 51.2h54.4V304h35.2v55.2H584c10.4-16.8 20-34.4 28-52l32 11.2c-6.4 13.6-14.4 27.2-24 40.8h84.8v92h-33.6v-63.2H352v64.8h-32.8V359.2z m82.4 202.4v99.2h-32.8V532H656v123.2h-32.8V561.6H401.6z m-6.4-57.6V420h234.4V504H395.2z m95.2 183.2c-24 22.4-78.4 36.8-161.6 42.4l-13.6-30.4c74.4-3.2 123.2-14.4 146.4-32 20.8-17.6 33.6-47.2 36.8-88l33.6 2.4c-6.4 52.8-20 87.2-41.6 105.6z m196.8 45.6c-53.6-24-108-42.4-164.8-56l16.8-24.8C600 665.6 656 683.2 706.4 704l-19.2 28.8z"-->
+<!--                      fill="#FF5500"-->
+<!--                      p-id="6415"-->
+<!--                    />-->
+<!--                  </svg>-->
+<!--                </el-popover>-->
               </el-row>
             </div>
 
@@ -349,9 +349,10 @@ a {
 }
 #artcle-info .abstract {
   color: #ffffff;
-  border-left: 3px solid #f56c6c;
+  border-left: 4px solid #1fa059;
   padding: 10px;
-  background-color: rgba(126, 129, 135, 0.3);
+  background-color: rgba(189, 191, 196, 0.3);
+  border-radius: 0 12px 12px 0;
 }
 
 #artcle-info .timeAndView {
@@ -361,6 +362,7 @@ a {
   color: #ffffff;
 }
 #articlebtn {
+  margin-top: 30px;
   text-align: center;
   margin-bottom: 40px;
 }
@@ -387,9 +389,10 @@ img.has {
   margin: 0 3.2px;
 }
 #statement {
-  border-left: 3px solid #f56c6c;
+  border-left: 4px solid #1fa059;
   padding: 20px;
   background-color: #ebeef5;
+  border-radius: 0 8px 8px 0;
   .item{
     padding: 5px;
   }

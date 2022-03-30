@@ -3,10 +3,10 @@
     <div class="app-head">
       <div class="app-head-inner">
         <router-link :to="{path: '/'}">
-          <img src="../assets/name.png" width="30px">
+          <img src="../assets/aiti_community.png" width="30px">
          </router-link>
 
-        <div class="sBar"  ><search-bar></search-bar></div>
+        <div class="sBar"><search-bar></search-bar></div>
 
         <div class="head-nav">
           <ul class="nav-list">
@@ -165,7 +165,7 @@ body {
 .sBar{
   height: 100px;
   width: 400px;
-  margin-top:-160px;
+  margin-top:28px;
   margin-left: 130px;
   display: inline-block;
 }

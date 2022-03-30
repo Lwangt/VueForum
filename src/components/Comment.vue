@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3 class="header">Comments | 快来评论吧~</h3>
+    <div class="fs22 pl5">评论区</div>
     <div class="comment" v-for="item in comments" :key="item.comment_id">
       <div class="info">
         <img class="avatar" :src="item.avatar" width="36" height="36" />
@@ -73,7 +73,7 @@
             </div>
             <div class="btn-control">
               <el-button class="cancel" type="info" plain round @click="cancel">取消</el-button>
-              <el-button class="btn" type="primary" round @click="commitComment">确定</el-button>
+              <el-button type="primary" round @click="commitComment">确定</el-button>
             </div>
           </div>
         </transition>
@@ -252,7 +252,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .container {
   padding: 100px 10px;
   box-sizing: border-box;
@@ -309,7 +309,7 @@ export default {
 }
 .container .comment .control .like.active,
 .container .comment .control .like:hover {
-  color: #409eff;
+  color: #1fa059;
 }
 .container .comment .control .like .iconfont {
   font-size: 14px;
@@ -344,11 +344,11 @@ export default {
   color: #303133;
 }
 .container .comment .reply .item .reply-content .from-name {
-  color: #409eff;
+  color: #1fa059;
   padding: 0 10px;
 }
 .container .comment .reply .item .reply-content .to-name {
-  color: #409eff;
+  color: #1fa059;
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -464,4 +464,5 @@ export default {
 .fatherInput .input-wrapper .btn-control .confirm {
   font-size: 16px;
 }
+
 </style>

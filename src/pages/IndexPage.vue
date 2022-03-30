@@ -15,7 +15,7 @@
             </ul>
             <div v-if="!product.last" class="hr"></div>
         </div>
-        
+
       </div>
       <div class="index-left-block lastest-news">
         <h2>合作伙伴</h2>
@@ -29,8 +29,8 @@
     <div class="index-right">
       <slide-show :slides="slides" :inv="3000"></slide-show>
       <div class="index-board-list">
-        <div 
-        class="index-board-item" 
+        <div
+        class="index-board-item"
         v-for="(item,index) in boardList" :key="item.id"
         :class="[{'line-last':index % 2 !==0},'index-board-'+item.id]">
             <div class="index-board-item-inner">
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="index-content">
-          
+
       </div>
     </div>
   </div>
@@ -59,12 +59,12 @@ export default {
         this.$http.get('api/newsList')
         .then((res)=>{
             this.newsList=res.data;
-        },(err)=>{ 
+        },(err)=>{
             console.log(err);
         }
-        ) 
+        )
     },
-    
+
     data(){
         return{
                 slides: [
@@ -88,7 +88,7 @@ export default {
                   title: 'xxx4',
                   href: 'detail/forecast'
                 },
-                
+
               ],
             boardList:[
                 {   id:'car',
@@ -118,7 +118,7 @@ export default {
                     id:1,
                     title:'技术频道',
                     list:[
-                    {   
+                    {
                         src: require('../assets/icon/js.png'),
                         name:'前端',
                         url:'/article/js'
@@ -127,7 +127,7 @@ export default {
                         src: require('../assets/icon/back.png'),
                         name:'后端',
                         url:'/article/back',
-                        
+
                     },
                     {
                         src: require('../assets/icon/ai.png'),
@@ -161,8 +161,8 @@ export default {
                         url:'www.baidu.com'
                     },
                 ]
-                },  
-                
+                },
+
             }
         }
     }
@@ -214,9 +214,9 @@ export default {
     background-color: white;
     line-height: 30px;
     color: #757575;
-    padding-left: 30p;
+    padding-left: 30px;
     font-size: 14px;
-    
+
 }
 .h3-line{
   color: #d4d4d4;
@@ -233,7 +233,7 @@ export default {
   vertical-align: middle;
 }
 .left-a{
-  
+
   display: inline-block;
   margin-left: 10px;
 }
