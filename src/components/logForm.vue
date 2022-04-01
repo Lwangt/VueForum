@@ -24,6 +24,7 @@
 <script>
 
 import {loginUrl} from "../services/login";
+import { mapMutations } from 'vuex';
 
 export default {
   data () {
@@ -87,15 +88,22 @@ export default {
     // }
   },
   methods: {
+    ...mapMutations(['changeLogin']),
     async onLogin () {
+      let _this = this;
+      // _this.changeLogin({ Authorization: "111111" });
+      // console.log("111 has stored")
       try {
         let { data: { data, code, message } } = await loginUrl({
-           formData
+
         })
-        if (code == 0) {
+        if (code == 200) {
           this.$emit('ok')
           //关闭弹窗
           this.dialogVisible = false
+          console.log(data);
+          _this.userToken = 'Bearer ' + data.data.body.token;
+          _this.changeLogin({ Authorization: _this.userToken });
           return
         }
         else {

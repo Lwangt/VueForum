@@ -27,7 +27,12 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides="slides" :inv="3000"></slide-show>
+      <slide-show :slides="slides" :inv="3000" ></slide-show>
+
+      <div style="margin-top: 50px; margin-bottom: 30px; margin-left: 20px;">
+        <div style="color: white;font-weight: bold;border-radius: 7px;background-color: #03c283;padding: 12px;">· 今日书籍推荐</div>
+      </div>
+
       <div class="index-board-list">
         <div
         class="index-board-item"

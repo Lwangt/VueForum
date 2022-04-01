@@ -1,6 +1,6 @@
 <template>
   <div class="order-wrap">
-    <h3>您的产品</h3>
+    <h3 class="mt40">您的产品</h3>
     <div class="order-list-choose">
       <div class="order-list-option">
         选择产品：
@@ -155,11 +155,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .order-wrap {
   width: 1200px;
   min-height: 800px;
-  margin: 20px auto;
+  margin: auto;
   overflow: hidden;
 }
 .order-wrap h3 {
@@ -204,4 +204,3 @@ export default {
   background: #35495e;
 }
 </style>
-    

@@ -5,8 +5,8 @@
             <h2><i class="el-icon-loading"></i>&nbsp;&nbsp;近期热门</h2>
             <ul>
                 <h3>技术文章<span class="h3-line">  ———————</span></h3>
-                <router-link v-for="item in list" :to="{ path: item.url }" :key='item.id' 
-                active-class="active" 
+                <router-link v-for="item in list" :to="{ path: item.url }" :key='item.id'
+                active-class="active"
                 @click="toggleActive(item.name)"
                 tag="li">
                   <img :src="item.src" alt="" width="15px;" class="left-img">
@@ -14,7 +14,7 @@
                 </router-link>
 
             </ul>
-        </div>       
+        </div>
     </div>
     <div class="right-block">
             <keep-alive>
@@ -29,7 +29,7 @@ export default {
   data(){
       return{
           list:[
-                    {   
+                    {
                         src: require('../assets/icon/js.png'),
                         name:'前端',
                         url:'/article/js'
@@ -38,7 +38,7 @@ export default {
                         src: require('../assets/icon/back.png'),
                         name:'后端',
                         url:'/article/back',
-                        
+
                     },
                     {
                         src: require('../assets/icon/ai.png'),
@@ -134,9 +134,9 @@ export default {
     background-color: white;
     line-height: 30px;
     color: #757575;
-    padding-left: 30p;
+    padding-left: 30px;
     font-size: 14px;
-    
+
 }
 .left-block li {
   cursor: pointer;
@@ -151,7 +151,7 @@ export default {
   vertical-align: middle;
 }
 .left-aa{
-  
+
   display: inline-block;
   margin-left: 10px;
 }

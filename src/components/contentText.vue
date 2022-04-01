@@ -2,11 +2,11 @@
     <div class="content">
         <div class="c-title">{{title}}</div>
         <div class="c-text">{{text}} </div>
-        <div class="c-bottom"><i class="el-icon-star-on" ></i> 
-            <span class="collect">× {{num}}</span>
+        <div class="c-bottom"><i class="el-icon-star-on" ></i>
+            <span class="collect">{{num}}</span>
             <span class="author">{{author}} </span>
             <span class="time">· {{time}}</span>
-            
+
     </div>
 </div>
 </template>
@@ -14,7 +14,9 @@
 <script>
 export default {
     data(){
- 
+      return{
+
+      }
     },
     props:[
         'title',

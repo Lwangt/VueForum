@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <poster v-if="showPost" @closePost="closePost"></poster>
+    <poster v-if="showPost" v-show="path ==='/'"  @closePost="closePost"></poster>
 
     <div class="container">
 
@@ -33,6 +33,7 @@
       </keep-alive>
 
     </div>
+
     <div class="app-foot">
       <p>© All designed By 挨踢社区</p>
     </div>
@@ -70,7 +71,16 @@ export default {
       isShowLogDialog:false,
       isShowRegDialog:false,
       username:'',
-      showPost:true
+      showPost:true,
+      path:''
+    }
+  },
+  mounted() {
+    this.path = this.$route.path;
+  },
+  watch:{
+    $route(to,from){
+      this.path = to.path
     }
   },
   methods:{
@@ -231,6 +241,7 @@ body {
   display: inline-block;
   padding: 10px 20px;
   cursor: pointer;
+  border-radius: 6px;
 }
 .button:hover {
   background: #13227a;

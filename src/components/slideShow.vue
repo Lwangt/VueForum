@@ -32,7 +32,7 @@ export default {
         default:1000
     }
     },
-    
+
     data(){
         return{
             nowIndex:2,
@@ -42,7 +42,7 @@ export default {
     computed:{
         prevIndex(){
             if(this.nowIndex===0){
-                return this.slides.length -1 
+                return this.slides.length -1
             }
             else{
                 return this.nowIndex-1
@@ -65,7 +65,7 @@ export default {
                this.isShow=true
                this.nowIndex=index
            },10)
-        }, 
+        },
         runInv(){
             this.invId=setInterval(()=>{
                 this.goto(this.nextIndex)
@@ -78,7 +78,7 @@ export default {
     mounted(){
         this.runInv()
     }
-   
+
 }
 </script>
 
@@ -107,12 +107,13 @@ export default {
   position: absolute;
   width: 100%;
   color: #fff;
-  background: #7c7c7c;
+  background: #a9f1d9;
   opacity: .5;
   bottom: 0;
   height: 30px;
   text-align: left;
   padding-left: 15px;
+  padding-top: 5px;
 }
 .slide-img {
   width: 100%;

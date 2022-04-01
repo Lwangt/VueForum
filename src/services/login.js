@@ -1,6 +1,6 @@
 import request from '../utils/request'
 
-export function loginUrl (data = {}) {
+export function loginUrl (data) {
   return request({
       method: 'POST',
       url: '/login',
