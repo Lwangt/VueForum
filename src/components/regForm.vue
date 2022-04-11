@@ -15,7 +15,7 @@
     </div>
     <div class="flex justify-content-center align-items-center mt50 mb10">
       <div ></div>
-<!--      <el-button @click="onCancel" round  size="medium" style="width: 98px">取消</el-button>-->
+      <el-button @click="onCancel" round  size="medium" style="width: 98px">取消</el-button>
       <el-button @click="onRegister" round  size="medium" style="width: 98px;margin-left: 20px;background-color: #009a61;color: white">注册</el-button>
     </div>
   </div>
@@ -45,6 +45,9 @@ export default {
         }]
       }
     }
+  },
+  mounted() {
+
   },
   computed: {
     // userErrors () {
@@ -88,20 +91,23 @@ export default {
   },
   methods: {
     async onRegister () {
+      let _this = this;
+      const fo = this.formData;
       try {
-        let { data: { data, code, message } } = await registerUrl({
-          formData
+        await registerUrl({
+          name: fo.name,
+          password: fo.password
+        }).then(res=>{
+          console.log(res);
+          if (res.data.code === 200) {
+            this.$emit('ok')
+            //关闭弹窗
+            _this.onCancel();
+          }
+          else {
+            this.$message.error(res.data.msg)
+          }
         })
-        if (code == 0) {
-          this.$emit('ok')
-          //关闭弹窗
-          this.dialogVisible = false
-          return
-        }
-        else {
-          this.$message.error(message)
-          return
-        }
       } catch (e) {
         console.log(e)
       } finally {
@@ -109,7 +115,7 @@ export default {
       }
     },
     onCancel () {
-
+        this.$emit("close-dialog");
     }
   }
 }

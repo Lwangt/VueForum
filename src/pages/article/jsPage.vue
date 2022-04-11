@@ -2,7 +2,7 @@
     <div class="right-content">
         <card/>
         <span class="right-title" > 前端</span>
-        <div v-for="item in contentList" :key="item.id">
+        <div v-for="item in contentList" :key="item.id" @click="goToPage(item.article_id)">
             <contentText :title="item.title" :text="item.text" :num="item.num" :author="item.author" :time="item.time"/>
         </div>
     </div>
@@ -16,6 +16,7 @@ export default {
         return{
             contentList:[
                 {
+                    article_id:1,
                     title:"我们不背诵 API，只实现 API",
                     text:"有不少刚入行的同学跟我说：“JavaScript 很多 API 记不清楚怎么办？数组的这方法、那方法总是傻傻分不清楚，该如何是好？操作 DOM 的方式今天记，明天忘，真让人奔溃！",
                     href:"https://segmentfault.com/a/1190000019287040",
@@ -24,6 +25,7 @@ export default {
                     time:"1天前"
                 },
                 {
+                    article_id:2,
                     title:"Node.js究竟是什么？",
                     text:"如果你了解 Java 的话，会发现它们有点像。JavaScript 原来是只能在浏览器中运行的，当把它扩展成为可以在你的计算机上作为独立的程序运行时，Node.js 就出现了。现在你可以用 JavaScript 做更多的事情，而不仅仅是用在网站的互动和特效上。",
                     href:"https://segmentfault.com/a/1190000019283751",
@@ -73,12 +75,25 @@ export default {
                 },
 
             ]
-        }       
+        }
     },
     components:{
         contentText,
         card
+    },
+  methods:{
+    goToPage(id) {
+      let routeData = this.$router.resolve({
+        path: "/articleDetail",
+        query: {
+          id:id
+        }
+      });
+
+      //必要操作，否则不会打开新页面
+      window.open(routeData.href, '_blank');
     }
+  }
 }
 </script>
 

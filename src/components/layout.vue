@@ -38,13 +38,13 @@
       <p>© All designed By 挨踢社区</p>
     </div>
     <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
-      <log-form @has-log="onSuccessLog"></log-form>
+      <log-form @has-log="onSuccessLog" @close-dialog="closeDialog('isShowLogDialog')"></log-form>
     </my-dialog>
     <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
-      <reg-form></reg-form>
+      <reg-form @close-dialog="closeDialog('isShowRegDialog')"></reg-form>
     </my-dialog>
     <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
-      <AboutDialog></AboutDialog>
+      <AboutDialog @close-dialog="closeDialog('isShowAboutDialog')"></AboutDialog>
     </my-dialog>
   </div>
 </template>

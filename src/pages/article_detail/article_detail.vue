@@ -168,13 +168,9 @@ export default {
           "\n" +
           "**参数：**\n" +
           "\n" +
-          "![image-20210327094708401](https://gitee.com/zhangrenfeng/images/raw/master/img/20210327094716.png)\n" +
-          "\n" +
           "**实例：**\n" +
           "\n" +
           "、测试100个并发每秒10w个请求\n" +
-          "\n" +
-          "![image-20210327095549330](https://gitee.com/zhangrenfeng/images/raw/master/img/20210327095550.png)\n" +
           "\n" +
           "### 2.2 其他命令\n" +
           "\n" +
@@ -198,7 +194,7 @@ export default {
   },
   computed: {
 			blogId() {
-				return parseInt(this.$route.params.blogId)
+				return parseInt(this.$route.params.article_id)
       },
       ...mapState(['siteInfo'])
 		},
@@ -232,6 +228,9 @@ export default {
     }
   },
   methods: {
+    getBlogId(){
+      return this.$route.query.id;
+    },
     getBlog(blogId = this.blogId) {
       const _this = this;
       // this.$axios.get("/blog/" + blogId).then(res => {
@@ -284,7 +283,6 @@ export default {
       }
     },
     LikeBlog() {
-      const blogId = this.$route.params.blogId;
       const _this = this;
       if (_this.getCookie("likeblog" + blogId) == null) {
         this.$axios.post("/likeBlog/" + blogId).then(res => {
@@ -307,6 +305,9 @@ export default {
         that.screenWidth = window.screenWidth;
       })();
     };
+
+    console.log("article_id = "+this.$route.query.id)
+
   },
   watch: {
     screenWidth(val) {

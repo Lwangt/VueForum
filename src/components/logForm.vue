@@ -15,7 +15,7 @@
     </div>
     <div class="flex justify-content-center align-items-center mt50 mb10">
       <div ></div>
-<!--      <el-button @click="onCancel" round  size="medium" style="width: 98px">取消</el-button>-->
+      <el-button @click="onCancel" round  size="medium" style="width: 98px">取消</el-button>
       <el-button @click="onLogin" round  size="medium" style="width: 98px;margin-left: 20px;background-color: #009a61;color: white">登录</el-button>
     </div>
   </div>
@@ -58,16 +58,16 @@ export default {
             name: fo.name,
             password: fo.password
         }).then(res=>{
-          console.log(res);
+          console.log(+res);
           if (res.data.code === 200) {
             this.$emit('ok')
             //关闭弹窗
-            _this.closeMyself();
+            _this.onCancel();
             _this.userToken = 'Bearer ' + res.data.token;
             _this.changeLogin({ Authorization: _this.userToken });
           }
           else {
-            this.$message.error(res.data.message)
+            this.$message.error(res.data.msg)
           }
         })
       } catch (e) {
@@ -77,7 +77,7 @@ export default {
       }
     },
     onCancel () {
-      this.closeMyself();
+      this.$emit("close-dialog");
     }
 }
 }

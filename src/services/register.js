@@ -3,7 +3,7 @@ import request from '../utils/request'
 export function registerUrl (data = {}) {
   return request({
     method: 'POST',
-    url: '/register',
+    url: '/user/register',
     data,
   })
 }
