@@ -3,8 +3,8 @@
     <div class="flex justify-content-center align-items-center fs20 font-weight-700" style="color: #009a61">注册挨踢社区，加入我们</div>
     <div class="pt20 flex justify-content-center align-items-center">
       <el-form ref="form" :model="formData" :rules="formRules" label-width="120px" label-position="left" class="ui-el-form pl18">
-        <el-form-item prop="username" label="用户名" class="mt10">
-          <el-input  v-model="formData.username"  style="width: 280px"  maxlength="15" placeholder="请输入用户名">
+        <el-form-item prop="name" label="用户名" class="mt10">
+          <el-input  v-model="formData.name"  style="width: 280px"  maxlength="15" placeholder="请输入用户名">
           </el-input>
         </el-form-item>
         <el-form-item prop="password" label="密码" class="mt20">
@@ -15,7 +15,7 @@
     </div>
     <div class="flex justify-content-center align-items-center mt50 mb10">
       <div ></div>
-      <el-button @click="onCancel" round  size="medium" style="width: 98px">取消</el-button>
+<!--      <el-button @click="onCancel" round  size="medium" style="width: 98px">取消</el-button>-->
       <el-button @click="onRegister" round  size="medium" style="width: 98px;margin-left: 20px;background-color: #009a61;color: white">注册</el-button>
     </div>
   </div>
@@ -29,11 +29,11 @@ export default {
   data () {
     return {
       formData:{
-        username: '',
+        name: '',
         password: ''
       },
       formRules: {
-        username: [{
+        name: [{
           required: true,
           message: '请输入用户名',
           trigger: 'blur'
