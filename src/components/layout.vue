@@ -43,7 +43,7 @@
     </div>
 
     <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
-      <log-form  @close-dialog="closeDialog('isShowLogDialog')" @updateLogin="checkUserMessage()" @reloadTopLogin="reloadTopLoginMethod()" ></log-form>
+      <log-form  @close-dialog="closeDialog('isShowLogDialog')" @updateLogin="checkUserMessage()" @reloadTopLogin="reloadTopLoginMethod()"></log-form>
     </my-dialog>
     <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
       <reg-form @close-dialog="closeDialog('isShowRegDialog')"></reg-form>
@@ -104,7 +104,7 @@ export default {
     checkToken(){
           //用 token 验证
       let token = localStorage.getItem('Authorization');
-      if (token === null || token === ''){
+      if (token === ''){
         this.isLogin = false;
       }
       else{
@@ -200,7 +200,7 @@ q:before, q:after {
   content: none;
 }
 .nav-list li:hover{
-  color: #1fa059;
+  color: #2c9ab0;
 }
 table {
   border-collapse: collapse;

@@ -46,7 +46,7 @@ export default {
 }
 .c-title:hover{
     font-weight: bold;
-    color: #1fa059;
+    color: #4dd8f1;
     cursor: pointer;
 }
 .c-text{
@@ -64,7 +64,7 @@ export default {
 }
 .el-icon-star-on{
     display: inline-block;
-    color: #1fa059;
+    color: #7acfde;
     font-size: 16px;
 }
 .author{
@@ -74,7 +74,7 @@ export default {
 }
 .collect{
     font-weight: bold;
-    color: #1fa059;
+    color: #7acfde;
 }
 .c-bottom{
     font-size: 14px;

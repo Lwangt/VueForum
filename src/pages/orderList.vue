@@ -195,9 +195,9 @@ export default {
   padding: 10px 0;
 }
 .order-list-table th {
-  background: #4fc08d;
+  background: #53d2ec;
   color: #fff;
-  border: 1px solid #4fc08d;
+  border: 1px solid #53d2ec;
   cursor: pointer;
 }
 .order-list-table th.active {

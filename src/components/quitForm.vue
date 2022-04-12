@@ -1,16 +1,15 @@
 <template>
   <div class="login-form">
-    <div class="flex justify-content-center align-items-center fs20 font-weight-700" style="color: #009a61">是否退出登录？</div>
+    <div class="flex justify-content-center align-items-center fs20 font-weight-700" style="color: #63d6e5">是否退出登录？</div>
     <div class="flex justify-content-center align-items-center mt50 mb10">
       <el-button @click="onCancel" round  size="medium" style="width: 98px">取消</el-button>
-      <el-button @click="onQuit" round  size="medium" style="width: 98px;margin-left: 20px;background-color: #009a61;color: white">确认</el-button>
+      <el-button @click="onQuit" round  size="medium" style="width: 98px;margin-left: 20px;background-color: #63d6e5;color: white">确认</el-button>
     </div>
   </div>
 </template>
 
 <script>
 
-import {quitUrl} from "../services/login";
 import { mapMutations } from 'vuex';
 
 export default {
@@ -23,7 +22,8 @@ export default {
 
     async onQuit () {
       //重置vuex中的用户信息和token
-      localStorage.setItem('Authorization',null);
+      let nothing = "";
+      localStorage.setItem('Authorization',nothing);
       await this.$store.dispatch('storeUserMessage', {
         id: null,
         name: '',
@@ -55,7 +55,7 @@ export default {
   font-size: 30px;
   text-align: center;
   font-weight: bold;
-  color: #04cb81;
+  color: #63d6e5;
 }
 .loginDialog{
   border-radius: 8px;
@@ -65,6 +65,6 @@ export default {
   margin-left: 120px;
 }
 .login-button{
-  background-color: #04cb81;
+  background-color: #63d6e5;
 }
 </style>

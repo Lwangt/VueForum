@@ -107,7 +107,7 @@ export default {
   position: absolute;
   width: 100%;
   color: #fff;
-  background: #a9f1d9;
+  background: #a9f1f0;
   opacity: .5;
   bottom: 0;
   height: 30px;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-content-center align-items-center fs20 font-weight-700" style="color: #009a61">关于本站</div>
+    <div class="flex justify-content-center align-items-center fs20 font-weight-700" style="color: #63d6e5">关于本站</div>
     <div class="mt70"></div>
     <div class="flex justify-content-center align-items-center fs15 font-weight-400" >By 刘汪涛</div>
     <div class="mt40"></div>
@@ -33,7 +33,7 @@ export default {
   font-size: 30px;
   text-align: center;
   font-weight: bold;
-  color: #04cb81;
+  color: #63d6e5;
 }
 .loginDialog{
   border-radius: 8px;
@@ -43,6 +43,6 @@ export default {
   margin-left: 120px;
 }
 .login-button{
-  background-color: #04cb81;
+  background-color: #63d6e5;
 }
 </style>

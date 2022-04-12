@@ -118,7 +118,7 @@ export default {
   margin-bottom: 20px;
 }
 .left-block h2 {
-  background: #009a61;
+  background: #0e849c;
   color: #fff;
   padding: 10px 15px;
   border-radius: 6px;
@@ -144,14 +144,13 @@ export default {
   border-radius: 10px;
 }
 .left-block li:hover {
-
+  background-color: #bbe6ee;
 }
 .left-img{
   display:inline-block;
   vertical-align: middle;
 }
 .left-aa{
-
   display: inline-block;
   margin-left: 10px;
 }
@@ -159,7 +158,7 @@ export default {
   color: #d4d4d4;
 }
 .active{
-  background-color: #00ee95;
+  background-color: #a3e5f1;
   color: #fff;
   font-weight: bold;
 }

@@ -30,7 +30,7 @@
       <slide-show :slides="slides" :inv="3000" ></slide-show>
 
       <div style="margin-top: 50px; margin-bottom: 30px; margin-left: 20px;">
-        <div style="color: white;font-weight: bold;border-radius: 7px;background-color: #03c283;padding: 12px;">· 今日书籍推荐</div>
+        <div style="color: white;font-weight: bold;border-radius: 7px;background-color: #7eb6ed;padding: 12px;">· 今日书籍推荐</div>
       </div>
 
       <div class="index-board-list">
@@ -201,7 +201,7 @@ export default {
   margin-bottom: 20px;
 }
 .index-left-block h2 {
-  background: #009a61;
+  background: #488bcd;
   color: #fff;
   padding: 10px 15px;
   margin-bottom: 20px;
@@ -231,7 +231,7 @@ export default {
   border-radius: 10px;
 }
 .index-left-block li:hover {
-  background-color: #e4f8e9;
+  background-color: #bbe6ee;
 }
 .left-img{
   display:inline-block;

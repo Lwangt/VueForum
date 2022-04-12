@@ -40,7 +40,7 @@ export default {
 .head-post{
   position: relative;
   width:100%;
-  background-color: #009a61;
+  background-color: #53d2ec;
   height: 190px;
   padding-top: 20px;
   box-sizing: border-box;
@@ -94,11 +94,11 @@ export default {
 }
 .btn-log{
   background-color: #fff;
-  color: #009a61;
+  color: #53d2ec;
   font-weight: normal;
 }
 .btn-reg{
-  background-color: #009a61;
+  background-color: #53d2ec;
   color: #fff;
   font-weight: normal;
   border:1px solid #fff;
