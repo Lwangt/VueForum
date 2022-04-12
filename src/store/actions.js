@@ -1,7 +1,8 @@
 import {
-	SAVE_SITE_INFO,
-	SAVE_INTRODUCTION,
-	SET_IS_BLOG_RENDER_COMPLETE,
+  SAVE_SITE_INFO,
+  SAVE_INTRODUCTION,
+  SET_IS_BLOG_RENDER_COMPLETE,
+  STORE_USER_MESSAGE,
 } from "./mutations-types";
 
 
@@ -14,5 +15,8 @@ export default {
 	},
 	setIsBlogRenderComplete({commit}, ok) {
 		commit(SET_IS_BLOG_RENDER_COMPLETE, {ok})
-	}
+	},
+  storeUserMessage({commit}, user) {
+    commit(STORE_USER_MESSAGE, {user})
+  }
 }

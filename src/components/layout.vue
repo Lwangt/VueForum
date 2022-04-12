@@ -7,16 +7,20 @@
          </router-link>
 
         <div class="sBar"><search-bar></search-bar></div>
-
-        <div class="head-nav">
-          <ul class="nav-list">
-            <li v-if=" username!=='' "> {{ username }} </li>
-            <li class="nav-pile">|</li>
-            <li v-if=" username!=='' " @click="quit">退出</li>
-            <li v-if=" username==='' " @click="logClick">登录</li>
-            <li class="nav-pile" v-if=" username==='' ">|</li>
-            <li @click="regClick" v-if=" username==='' ">免费注册</li>
+        <div class="head-nav" v-if="isReloadData">
+          <ul class="nav-list" v-if="isLogin">
+            <li @click="userCenterClick">个人中心</li>
             <li class="nav-pile" >|</li>
+            <li @click="quitClick">退出登录</li>
+            <li class="nav-pile" >|</li>
+            <li @click="aboutClick">关于本站</li>
+            <li class="nav-pile">|</li>
+          </ul>
+          <ul class="nav-list" v-if="!isLogin">
+            <li @click="logClick">登录</li>
+            <li class="nav-pile" >|</li>
+            <li @click="regClick">免费注册</li>
+            <li class="nav-pile">|</li>
             <li @click="aboutClick">关于本站</li>
             <li class="nav-pile">|</li>
           </ul>
@@ -37,8 +41,9 @@
     <div class="app-foot">
       <p>© All designed By 挨踢社区</p>
     </div>
+
     <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
-      <log-form @has-log="onSuccessLog" @close-dialog="closeDialog('isShowLogDialog')"></log-form>
+      <log-form  @close-dialog="closeDialog('isShowLogDialog')" @updateLogin="checkUserMessage()" @reloadTopLogin="reloadTopLoginMethod()" ></log-form>
     </my-dialog>
     <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
       <reg-form @close-dialog="closeDialog('isShowRegDialog')"></reg-form>
@@ -46,6 +51,11 @@
     <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
       <AboutDialog @close-dialog="closeDialog('isShowAboutDialog')"></AboutDialog>
     </my-dialog>
+    <my-dialog :is-show="isShowQuitDialog" @on-close="closeDialog('isShowQuitDialog')">
+      <QuitForm @close-dialog="closeDialog('isShowQuitDialog')" @updateLogin="checkUserMessage()" @reloadTopLogin="reloadTopLoginMethod()"></QuitForm>
+    </my-dialog>
+
+
   </div>
 </template>
 
@@ -53,6 +63,7 @@
 import Dialog from './base/dialog'
 import LogForm from './logForm'
 import RegForm from './regForm'
+import QuitForm from "./quitForm";
 import AboutDialog from  './aboutDialog'
 import searchBar from './searchBar'
 import poster from './poster'
@@ -61,15 +72,19 @@ export default {
     MyDialog:Dialog,
     LogForm,
     RegForm,
+    QuitForm,
     AboutDialog,
     searchBar,
     poster
   },
   data(){
     return {
+      isReloadData:true,
+      isLogin:false,
       isShowAboutDialog:false,
       isShowLogDialog:false,
       isShowRegDialog:false,
+      isShowQuitDialog:false,
       username:'',
       showPost:true,
       path:''
@@ -77,6 +92,8 @@ export default {
   },
   mounted() {
     this.path = this.$route.path;
+    //重新检查是否登录,checkToken和checkUserMessage二选一
+    this.checkToken();
   },
   watch:{
     $route(to,from){
@@ -84,6 +101,34 @@ export default {
     }
   },
   methods:{
+    checkToken(){
+          //用 token 验证
+      let token = localStorage.getItem('Authorization');
+      if (token === null || token === ''){
+        this.isLogin = false;
+      }
+      else{
+        this.isLogin = true;
+      }
+    },
+    checkUserMessage(){
+          //用 userMessage来验证
+      let userM = this.$store.state.userMessage;
+      let iid = userM.id;
+      if (iid){
+        this.isLogin = true;
+      }
+      else{
+        this.isLogin = false;
+      }
+    },
+    async reloadTopLoginMethod(){
+      this.isReloadData = false;
+      this.$nextTick(()=>{
+        this.isReloadData = true;
+      })
+
+    },
     aboutClick(){
       this.isShowAboutDialog=true
     },
@@ -96,12 +141,11 @@ export default {
     closeDialog(attr){
       this[attr]=false
     },
-    onSuccessLog(data){
-      this.closeDialog('isShowLogDialog')
-      this.username=data.username
+    quitClick(){
+      this.isShowQuitDialog=true
     },
-    quit(){
-      this.username=''
+    userCenterClick(){
+      //跳转到用户中心
     },
     closePost(){
       console.log("xx")

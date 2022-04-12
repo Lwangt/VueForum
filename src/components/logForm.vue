@@ -58,13 +58,23 @@ export default {
             name: fo.name,
             password: fo.password
         }).then(res=>{
-          console.log(+res);
+          // console.log(res);
           if (res.data.code === 200) {
-            this.$emit('ok')
+
+            //保存用户信息到vuex中
+            this.$store.dispatch('storeUserMessage',res.data.userMessage)
+
             //关闭弹窗
             _this.onCancel();
             _this.userToken = 'Bearer ' + res.data.token;
             _this.changeLogin({ Authorization: _this.userToken });
+
+            //刷新页面
+            this.$emit('updateLogin');
+            this.$emit('reloadTopLogin');
+
+            this.$message.info("登录成功");
+
           }
           else {
             this.$message.error(res.data.msg)

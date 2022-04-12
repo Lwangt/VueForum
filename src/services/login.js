@@ -8,3 +8,10 @@ export function loginUrl (data) {
     })
 }
 
+export function quitUrl (data) {
+  return request({
+    method: 'POST',
+    url: '/user/quit',
+    data,
+  })
+}

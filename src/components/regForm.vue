@@ -98,11 +98,11 @@ export default {
           name: fo.name,
           password: fo.password
         }).then(res=>{
-          console.log(res);
+          // console.log(res);
           if (res.data.code === 200) {
-            this.$emit('ok')
             //关闭弹窗
             _this.onCancel();
+            this.$message.info("注册成功");
           }
           else {
             this.$message.error(res.data.msg)

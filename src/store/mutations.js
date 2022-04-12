@@ -1,7 +1,7 @@
 import {
-	SAVE_SITE_INFO,
-	SAVE_INTRODUCTION,
-	SET_IS_BLOG_RENDER_COMPLETE
+  SAVE_SITE_INFO,
+  SAVE_INTRODUCTION,
+  SET_IS_BLOG_RENDER_COMPLETE, STORE_USER_MESSAGE
 } from "./mutations-types";
 
 export default {
@@ -14,6 +14,9 @@ export default {
 	[SET_IS_BLOG_RENDER_COMPLETE](state, {ok}) {
 		state.isBlogRenderComplete = ok
 	},
+  [STORE_USER_MESSAGE](state, {user}) {
+    state.userMessage = user
+  },
   // 修改token，并将token存入localStorage
   changeLogin (state, user) {
     state.Authorization = user.Authorization;

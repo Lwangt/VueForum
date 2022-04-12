@@ -9,5 +9,12 @@ export default {
 	isBlogRenderComplete: false,
 
   // 存储token
-  Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : ''
+  Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
+
+  //用户信息
+  userMessage:{
+	  id:null,
+	  name:'',
+    password:''
+  }
 }
