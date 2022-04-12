@@ -8,7 +8,8 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="password" label="密码" class="mt20">
-          <el-input  v-model="formData.password" style="width: 280px" oninput ="value=value.replace(/[^a-zA-Z0-9.]/g,'')" placeholder="请输入密码" maxlength="25">
+          <el-input  :type="passw"  v-model="formData.password" style="width: 280px" oninput ="value=value.replace(/[^a-zA-Z0-9.]/g,'')" placeholder="请输入密码" maxlength="25">
+            <i slot="suffix" :class="icon" @click="showPass"></i>
           </el-input>
         </el-form-item>
       </el-form>
@@ -29,6 +30,10 @@ import { mapMutations } from 'vuex';
 export default {
   data () {
     return {
+      //用于改变Input类型
+      passw:"password",
+      //用于更换Input中的图标
+      icon:"el-input__icon el-icon-view",
       formData:{
         name: '',
         password: ''
@@ -88,6 +93,17 @@ export default {
     },
     onCancel () {
       this.$emit("close-dialog");
+    },
+    showPass(){
+      //点击图标是密码隐藏或显示
+      if( this.passw=="text"){
+        this.passw="password";
+        //更换图标
+        this.icon="el-input__icon el-icon-view";
+      }else {
+        this.passw="text";
+        this.icon="el-input__icon el-icon-loading";
+      };
     }
 }
 }
