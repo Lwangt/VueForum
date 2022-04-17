@@ -1,125 +1,19 @@
 <template>
   <div class="container">
     <div class="fs22 pl5">评论区</div>
-    <div class="comment" v-for="item in comments" :key="item.comment_id">
-      <div class="info">
-        <img class="avatar" :src="item.avatar" width="36" height="36" />
-        <div class="right">
-          <a class="name">{{item.nick_name}}</a>
-          <div class="date">{{item.create_time}}</div>
-        </div>
+    <div class="ml10 mt20 flex" v-for="item in comments">
+      <div class="mr15" style="width: 50px;height: 50px;background-color: #8ccded;margin-top: 2px">
       </div>
-      <div class="content">{{item.content}}</div>
-      <div class="control">
-        <span class="comment-reply" @click="showCommentInput(item)">
-          <i class="iconfont el-icon-chat-dot-round"></i>
-          <span>回复</span>
-        </span>
-      </div>
-      <div class="reply">
-        <div class="item" v-for="reply in item.replyComments" :key="reply.comment_id">
-          <div class="reply-content info">
-            <img class="avatar" :src="reply.avatar" width="36" height="36" />
-            <span class="from-name">{{reply.nick_name}}</span>
-            <span>:</span>
-            <span class="to-name">@{{reply.reply_nick_name}}</span>
-            <span>{{reply.content}}</span>
-          </div>
-          <div class="reply-bottom">
-            <span>{{reply.create_time}}</span>
-            <span class="reply-text" @click="showCommentInput(item,reply)">
-              <i class="iconfont el-icon-chat-dot-round"></i>
-              <span>回复</span>
-            </span>
-          </div>
+      <div class="flex flex-direction-column">
+       <div class="flex" style="margin-top: 20px;">
+         <div >{{item.nickName}}</div>
+         <div class="ml20" style="color: #cccccc">{{item.createTime}}</div>
+       </div>
+        <div class="mt15">
+          <div>{{item.content}}</div>
         </div>
-        <div
-          class="write-reply"
-          v-if="item.replyComments.length > 0"
-          @click="showCommentInput(item)"
-        >
-          <i class="el-icon-edit"></i>
-          <span class="add-comment">添加新评论</span>
-        </div>
-        <transition name="fade">
-          <div class="input-wrapper" v-if="showItemId === item.comment_id">
-            <el-input
-              class="gray-bg-input"
-              v-model="commentForm.content"
-              type="textarea"
-              :rows="3"
-              autofocus
-              placeholder="写下你的评论"
-            ></el-input>
-            <div class="input-control">
-              <el-input
-                class="input"
-                placeholder="你的名称"
-                prefix-icon="el-icon-user"
-                v-model="commentForm.nick_name"
-              ></el-input>
-              <el-input
-                class="input"
-                placeholder="邮箱"
-                prefix-icon="el-icon-message"
-                v-model="commentForm.email"
-              ></el-input>
-              <el-input
-                class="input"
-                placeholder="站点链接"
-                prefix-icon="el-icon-link"
-                v-model="commentForm.site_url"
-              ></el-input>
-            </div>
-            <div class="btn-control">
-              <el-button class="cancel" type="info" plain round @click="cancel">取消</el-button>
-              <el-button type="primary" round @click="commitComment">确定</el-button>
-            </div>
-          </div>
-        </transition>
-      </div>
-    </div>
-    <el-pagination
-      @current-change="getComment"
-      :current-page="currentPage"
-      :page-count="total"
-      layout="prev, pager, next"
-      background
-      hide-on-single-page
-    ></el-pagination>
-    <div class="fatherInput">
-      <div class="input-wrapper" v-if="showFatherInput">
-        <el-input
-          class="gray-bg-input"
-          v-model="commentForm.content"
-          type="textarea"
-          :rows="3"
-          autofocus
-          placeholder="写下你的评论"
-        ></el-input>
-        <div class="input-control">
-          <el-input
-            class="input"
-            placeholder="你的名称"
-            prefix-icon="el-icon-user"
-            v-model="commentForm.nick_name"
-          ></el-input>
-          <el-input
-            class="input"
-            placeholder="输入邮箱获取回复及头像"
-            prefix-icon="el-icon-message"
-            type="email"
-            v-model="commentForm.email"
-          ></el-input>
-          <el-input
-            class="input"
-            placeholder="站点链接"
-            prefix-icon="el-icon-link"
-            v-model="commentForm.site_url"
-          ></el-input>
-        </div>
-        <div class="btn-control">
-          <el-button class="btn" type="primary" round @click="commitComment">确定</el-button>
+        <div class="mt15">
+          <div @click="huifu()" style="color: #96e6dd;font-size: 15px;cursor:pointer">回复</div>
         </div>
       </div>
     </div>
@@ -127,6 +21,10 @@
 </template>
 
 <script>
+import {addComment} from "../services/comment";
+import {deleteComment} from "../services/comment";
+import {getCommentListByArticleId} from "../services/comment";
+
 export default {
   name: "comment",
   props: {
@@ -137,118 +35,49 @@ export default {
   },
   data() {
     return {
-      comments: {},
-      Postdata: {
-        blog_id: 0,
-        currentPage: 1,
-        page: 0
+      comments: {
       },
-      total: 0,
-      currentPage: 1,
-      showFatherInput: true,
-      showItemId: null,
-      commentForm: {
-        blog_id: 0,
-        content: "",
-        nick_name: "",
-        email: "",
-        site_url: "",
-        avatar: "",
-        reply_nick_name: "",
-        pid: null,
-        create_time: "",
-        page: 0,
-        is_check: 0
-      },
+      article_id: this.$route.query.id,
+      blog_id: 0,
       replyForm: {}
     };
   },
   watch: {
-    objectData: function(newVal, oldVal) {
-      // console.log(newVal)
-      this.Postdata.blog_id = newVal.blog_id;
-      this.Postdata.page = newVal.page;
-      this.commentForm.page = newVal.page;
-      //console.log(this.Postdata.blog_id)
-      newVal && this.getComment(this.currentPage);
-    }
+
   },
   methods: {
-    getComment(currentPage) {
-      // const _this = this;
-      // _this.Postdata.currentPage = currentPage;
-      // //console.log(_this.Postdata.blog_id)
-      // this.$axios.post("/comment/query", _this.Postdata).then(res => {
-      //   //   console.log(_this.Postdata.currentPage);
-      //   if (res.data.code == 200) {
-      //     _this.comments = res.data.data;
-      //     _this.total = res.data.totalPage;
-      //     _this.currentPage = res.data.currentPage;
-      //     //   console.log(res.data)
-      //     //this.$message.success(res.data.msg);
-      //   } else {
-      //     //this.$message.error(res.data.msg);
-      //     // console.log(res.data);
-      //   }
-      // });
-    },
-    showCommentInput(item, reply) {
-      if (reply) {
-        this.commentForm.content = "@" + reply.nick_name + " ";
-        this.showFatherInput = false;
-        this.replyForm = reply;
-        this.replyForm.pid=reply.comment_id;
-     //  console.log(reply);
-      } else {
-        this.commentForm.content = "";
-        this.showFatherInput = false;
-        this.replyForm = item;
-        this.replyForm.pid=item.comment_id;
-        //console.log(this.replyForm);
-      }
-      this.replyForm.comment_id = item.comment_id;
-      this.showItemId = item.comment_id;
-    },
-    cancel() {
-      this.showItemId = null;
-      this.commentForm.inputComment = "";
-      this.showFatherInput = true;
-      this.replyForm.pid=null;
-    },
-    commitComment() {
-      const _this = this;
-      this.commentForm.blog_id = this.Postdata.blog_id;
-      this.commentForm.avatar = "https://imapi.datealive.top/tp/pic.php";
-      if (this.commentForm.blog_id != null) {
-        if(_this.commentForm.content!=''&&_this.commentForm.email!=''&&_this.commentForm.nick_name!=''){
-        if (this.showItemId == null) {
-         // console.log("直接评论");
-          _this.commentForm.pid = 0;
-        } else {
-          this.commentForm.pid = this.replyForm.comment_id;
-          //this.commentForm.pid = this.replyForm.pid;//这里传入的是当前要回复评论的id，后期后端要改下这个bug
-          //console.log("这个评论的id"+ this.commentForm.pid);
-          this.commentForm.reply_nick_name = this.replyForm.nick_name;
-        }
-        //console.log(_this.commentForm)
-        this.$axios.post("/comment/save", _this.commentForm).then(res => {
-          //  console.log(res.data);
-          if (res.data.code === 200) {
-            _this.$message.success(res.data.msg);
-          } else {
-            this.$message.warning("请刷新页面再评论");
-          }
-        });
-        }else{
-          this.$message.warning("请检查是否填写完整");
-        }
 
-      } else {
-        this.$message.warning("请刷新页面再评论");
+    async getComment() {
+      let _this = this;
+      try {
+        await getCommentListByArticleId({
+          id: _this.article_id
+        }).then(res=>{
+          console.log(res);
+          if (res.data.code === 200) {
+            this.comments = res.data.data;
+          }
+          else {
+            this.$message.error(res.data.msg)
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      } finally {
+
       }
+    },
+
+
+
+    huifu(){
+
     }
+
   },
-  mounted() {}
+  mounted() {
+    this.getComment();
+  }
 };
 </script>
 

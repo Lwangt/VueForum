@@ -54,7 +54,7 @@ export default {
   padding-top: 20px;
   box-sizing: border-box;
   background:url('./../assets/char.png') 200px no-repeat ;
-  background-position: 640px;
+  background-position: 750px;
   background-size: 140px;
 }
 .info-left{
@@ -66,7 +66,7 @@ export default {
   display: inline-block;
   height: 100%;
   background:url('./../assets/cat-bc.png')  no-repeat ;
-  background-position: 300px 90px;
+  background-position: 430px 90px;
 }
 .info-big{
   font-size: 25px;

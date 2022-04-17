@@ -87,6 +87,7 @@ router.beforeEach((to, from, next) => {
     let token = localStorage.getItem('Authorization');
 
     if (token === null || token === '') {
+      alert("请先登录~");
       next('/');
     } else {
       next();

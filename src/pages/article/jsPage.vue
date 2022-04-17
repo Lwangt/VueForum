@@ -11,6 +11,7 @@
 <script>
 import contentText from './../../components/contentText'
 import card from './../../components/base/card'
+import {getArticleList} from "../../services/article";
 export default {
     data(){
         return{
@@ -74,13 +75,17 @@ export default {
                     time:"34分钟前"
                 },
 
-            ]
+            ],
+            articleList:[],
         }
     },
     components:{
         contentText,
         card
     },
+  mounted() {
+    getArticleList();
+  },
   methods:{
     goToPage(id) {
       let routeData = this.$router.resolve({
@@ -92,6 +97,27 @@ export default {
 
       //必要操作，否则不会打开新页面
       window.open(routeData.href, '_blank');
+    },
+
+    async getArticleList() {
+      let _this = this;
+      try {
+        await getArticleList({
+          type: "js"
+        }).then(res=>{
+          console.log(res);
+          if (res.data.code === 200) {
+            this.articleList = res.data.data;
+          }
+          else {
+            this.$message.error(res.data.msg)
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      } finally {
+
+      }
     }
   }
 }

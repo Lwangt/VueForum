@@ -94,6 +94,7 @@ export default {
     this.path = this.$route.path;
     //重新检查是否登录,checkToken和checkUserMessage二选一
     this.checkToken();
+    console.log("isLogin" + this.isLogin)
   },
   watch:{
     $route(to,from){
@@ -104,7 +105,7 @@ export default {
     checkToken(){
           //用 token 验证
       let token = localStorage.getItem('Authorization');
-      if (token === ''){
+      if (token === ''||!token){
         this.isLogin = false;
       }
       else{
