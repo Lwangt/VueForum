@@ -2,19 +2,26 @@
     <div class="right-content">
         <card/>
         <span class="right-title" > 前端</span>
-        <div v-for="item in contentList" :key="item.id" @click="goToPage(item.article_id)">
-            <contentText :title="item.title" :text="item.text" :num="item.num" :author="item.author" :time="item.time"/>
+<!--        <div v-for="item in contentList" :key="item.id" @click="goToPage(item.article_id)">-->
+<!--            <contentText :title="item.title" :text="item.text" :num="item.num" :author="item.author" :time="item.time"/>-->
+<!--        </div>-->
+        <div v-for="item in articleList" :key="item.id" @click="goToPage(item.article_id)">
+          <contentText v-if="isReloadData" :title="item.title" :text="item.miaoshu" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>
         </div>
+
     </div>
 </template>
 
 <script>
 import contentText from './../../components/contentText'
 import card from './../../components/base/card'
-import {getArticleList} from "../../services/article";
+import {getArticleListByType} from "../../services/article"
+import {getUserNameById} from  '../../services/user'
 export default {
     data(){
         return{
+            isReloadData:true,
+            midName:'',
             contentList:[
                 {
                     article_id:1,
@@ -76,7 +83,7 @@ export default {
                 },
 
             ],
-            articleList:[],
+            articleList:[]
         }
     },
     components:{
@@ -84,7 +91,7 @@ export default {
         card
     },
   mounted() {
-    getArticleList();
+    this.getArticleList();
   },
   methods:{
     goToPage(id) {
@@ -102,12 +109,12 @@ export default {
     async getArticleList() {
       let _this = this;
       try {
-        await getArticleList({
-          type: "js"
+        await getArticleListByType({
+          type: "js",
         }).then(res=>{
-          console.log(res);
           if (res.data.code === 200) {
-            this.articleList = res.data.data;
+            _this.articleList = res.data.data;
+            _this.addNametoList();
           }
           else {
             this.$message.error(res.data.msg)
@@ -116,9 +123,48 @@ export default {
       } catch (e) {
         console.log(e)
       } finally {
-
       }
-    }
+      await _this.reloadUserNameMethod();
+    },
+
+    //调用接口
+    async autoGetUserNameById(idd){
+      let _this = this;
+      try {
+        await getUserNameById({
+          id: idd
+        }).then(res=>{
+          if (res.data.code === 200) {
+            _this.midName = res.data.userName;
+          }
+          else {
+            this.$message.error(res.data.msg)
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      } finally {
+      }
+    },
+
+     addNametoList(){
+       let _this = this;
+       _this.articleList.forEach(async x=>{
+          if(x.authorId){
+            await _this.autoGetUserNameById(x.authorId);
+            x.userName = _this.midName;
+            await _this.reloadUserNameMethod();
+          }
+        })
+    },
+
+    async reloadUserNameMethod(){
+      this.isReloadData = false;
+      this.$nextTick(()=>{
+        this.isReloadData = true;
+      })
+    },
+
   }
 }
 </script>

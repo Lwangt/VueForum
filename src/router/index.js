@@ -12,7 +12,7 @@ import DetailCountPage from "../pages/book_details/count";
 import DetailForPage from "../pages/book_details/forecast";
 import DetailPubPage from "../pages/book_details/publish";
 import searchPage from "../pages/searchPage";
-import ArticleDetailPage from "../pages/article_detail/article_detail";
+import ArticleDetailPage from "../pages/article/article_detail";
 
 let router=new VRouter({
   mode:'history',

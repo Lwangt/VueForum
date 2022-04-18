@@ -2,12 +2,14 @@
     <div class="content">
         <div class="c-title">{{title}}</div>
         <div class="c-text">{{text}} </div>
-        <div class="c-bottom"><i class="el-icon-star-on" ></i>
+        <div class="c-bottom">
+            <i class="el-icon-star-on" ></i>
             <span class="collect">{{num}}</span>
+            <i class="el-icon-view" ></i>
+            <span class="read">{{readNum}}</span>
             <span class="author">{{author}} </span>
             <span class="time">· {{time}}</span>
-
-    </div>
+        </div>
 </div>
 </template>
 
@@ -21,10 +23,10 @@ export default {
     props:[
         'title',
         'text',
-        'href',
         'num',
         'author',
-        'time'
+        'time',
+        'readNum'
     ]
 }
 </script>
@@ -70,7 +72,7 @@ export default {
 .author{
     color: #888;
     font-size: 14px;
-    margin-left: 39px;
+    margin-left: 20px;
 }
 .collect{
     font-weight: bold;
@@ -82,5 +84,17 @@ export default {
 .time{
     color: #9E9E9E;
     font-size: 12px;
+    margin-left: 10px;
+}
+.read{
+  font-weight: bold;
+  color: #97bdf1;
+}
+.el-icon-view{
+  margin-left: 10px;
+  display: inline-block;
+  color: #7acfde;
+  font-size: 14px;
+  font-weight: bold;
 }
 </style>

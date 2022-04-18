@@ -350,7 +350,7 @@ a {
 }
 #artcle-info .abstract {
   color: #ffffff;
-  border-left: 4px solid #1f48a0;
+  border-left: 4px solid #3b98ea;
   padding: 10px;
   background-color: rgba(189, 191, 196, 0.3);
   border-radius: 0 12px 12px 0;

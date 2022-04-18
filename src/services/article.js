@@ -16,10 +16,10 @@ export function deleteArticle (data) {
   })
 }
 
-export function getArticleList (data) {
+export function getArticleListByType (data) {
   return request({
     method: 'POST',
-    url: '/comment/getArticleList',
+    url: '/article/getArticleListByType',
     data,
   })
 }
