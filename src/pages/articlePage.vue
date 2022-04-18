@@ -126,7 +126,7 @@ export default {
   margin-bottom: 20px;
 }
 .left-block h2 {
-  background: #0e849c;
+  background: #488bcd;
   color: #fff;
   padding: 10px 15px;
   border-radius: 6px;

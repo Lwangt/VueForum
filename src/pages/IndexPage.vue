@@ -15,10 +15,10 @@
             </ul>
             <div v-if="!product.last" class="hr"></div>
         </div>
-
+        <h2 @click="goToPage()"><i class="el-icon-s-management"></i>&nbsp;&nbsp;发布文章</h2>
       </div>
       <div class="index-left-block lastest-news">
-        <h2>合作伙伴</h2>
+        <h2><i class="el-icon-s-custom"></i>&nbsp;&nbsp;合作伙伴</h2>
         <ul>
           <li v-for="item in newsList" :key="item.id">
               <a :href="item.url">{{item.title}}</a>
@@ -170,7 +170,18 @@ export default {
 
             }
         }
-    }
+    },
+
+  methods:{
+    goToPage() {
+      let routeData = this.$router.resolve({
+        path: "/addArticle",
+      });
+
+      //打开新页面
+      window.open(routeData.href, '_blank');
+    },
+  }
 }
 </script>
 

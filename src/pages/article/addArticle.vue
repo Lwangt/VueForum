@@ -2,29 +2,38 @@
   <div>
     <div>
       <div class="flex">
-        <div class="flex flex-direction-column ml25 mb25">
-          <div class="type">选择分区:</div>
-          <div class="flex mt15">
+        <div class="flex mb25 mt5" style="height: 30px;margin-left: 165px;">
+          <div class="type mr15">选择分区</div>
+          <div class="flex">
             <div :class="{'selectButton':selectNum===1}"  class="typeButton cursor-pointer" @click="changeTypeTo('js')">前端</div>
             <div :class="{'selectButton':selectNum===2}"  class="typeButton cursor-pointer" @click="changeTypeTo('back')">后端</div>
             <div :class="{'selectButton':selectNum===3}"  class="typeButton cursor-pointer" @click="changeTypeTo('ai')">人工智能</div>
           </div>
         </div>
-        <div class=" ml25 mb25">
+        <div class=" mb25 mt5" style="margin-left: 500px">
           <div class="type" @click="titleClick()">文章标题</div>
         </div>
-        <div class=" ml25 mb25">
+        <div class=" ml25 mb25 mt5">
           <div class="type" @click="miaoshuClick()">文章简述</div>
         </div>
-        <div class=" ml25 mb25">
+
+      </div>
+
+      <div class="flex justify-content-center">
+
+        <div style="width: 85%;margin-bottom: 20px;">
+          <mavon-editor style="height: 480px; border-radius: 25px;"  :ishljs = "true" v-model="article.content"/>
+        </div>
+
+      </div>
+
+      <div class="flex justify-content-center">
+        <div class=" ml25 mb25" style="float: right">
           <el-button class="ti_jiao" @click="addArticle()">提交</el-button>
         </div>
-        <div class=" ml25 mb25">
+        <div class=" ml25 mb25" style="float: right">
           <el-button class="ti_jiao" @click="saveArticle()">保存草稿</el-button>
         </div>
-      </div>
-      <div>
-        <mavon-editor style="height: 480px; border-radius: 25px;" class="ml25 mr25 mb50" :ishljs = "true" v-model="article.content"/>
       </div>
 
     </div>
@@ -128,12 +137,13 @@ export default {
   box-shadow: 0px 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .typeButton{
-  padding: 8px 15px 8px 15px;
+  padding: 6px 15px 8px 15px;
   border-radius: 8px;
-  background-color: #6bbeec;
+  background-color: #3fabe6;
   margin-right: 15px;
   color: #fff;
   font-weight: bold;
+  text-align: center;
   box-shadow: 0px 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .ti_jiao{
@@ -145,6 +155,6 @@ export default {
   box-shadow: 0px 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .selectButton{
-  background-color: #6b90ec;
+  background-color: #7145e2;
 }
 </style>
