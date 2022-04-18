@@ -12,8 +12,8 @@
                   <img :src="item.src" alt="" width="15px;" class="left-img">
                   {{item.name}}
                 </router-link>
-
             </ul>
+          <h2 @click="goToPage()"><i class="el-icon-s-management"></i>&nbsp;&nbsp;发布文章</h2>
         </div>
     </div>
     <div class="right-block">
@@ -79,7 +79,15 @@ export default {
     toggleActive(now){
       console.log(now)
       this.nowFocus=now
-    }
+    },
+    goToPage() {
+      let routeData = this.$router.resolve({
+        path: "/addArticle",
+      });
+
+      //打开新页面
+      window.open(routeData.href, '_blank');
+    },
   }
 }
 </script>
@@ -161,6 +169,18 @@ export default {
   background-color: #a3e5f1;
   color: #fff;
   font-weight: bold;
+}
+.addArticleButton{
+  font-size: 14px;
+  color: #212121;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 30px;
+  margin-top: 30px;
+  border-radius: 6px;
+  background-color: #1AC4D1;
+  width: 60px;
 }
 
 </style>

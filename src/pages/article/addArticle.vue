@@ -1,15 +1,52 @@
 <template>
+  <div>
+    <div>
+      <div class="flex">
+        <div class="flex flex-direction-column ml25 mb25">
+          <div class="type">选择分区:</div>
+          <div class="flex mt15">
+            <div :class="{'selectButton':selectNum===1}"  class="typeButton cursor-pointer" @click="changeTypeTo('js')">前端</div>
+            <div :class="{'selectButton':selectNum===2}"  class="typeButton cursor-pointer" @click="changeTypeTo('back')">后端</div>
+            <div :class="{'selectButton':selectNum===3}"  class="typeButton cursor-pointer" @click="changeTypeTo('ai')">人工智能</div>
+          </div>
+        </div>
+        <div class="flex flex-direction-column ml25 mb25">
+          <div class="type" @click="titleClick()">文章标题</div>
+        </div>
+        <div class="flex flex-direction-column ml25 mb25">
+          <div class="type" @click="miaoshuClick()">文章简述</div>
+        </div>
+        <div class="flex flex-direction-column ml25 mb25">
+          <el-button class="ti_jiao" @click="addArticle()">提交</el-button>
+        </div>
+      </div>
+      <div>
+        <mavon-editor style="height: 480px; border-radius: 25px;" class="ml25 mr25 mb50" :ishljs = "true" v-model="article.content"/>
+      </div>
+
+    </div>
+
+    <TitleDialog ref="theTitleDialog" @dialogEvent="upadteTitleData"></TitleDialog>
+    <MiaoShuDialog ref="theMiaoShuDialog" @dialogEvent="upadteMiaoShuData"></MiaoShuDialog>
+
+  </div>
+
 
 </template>
 
 <script>
 import {addArticle} from "../../services/article";
+import TitleDialog from "../../components/articleTitleDialog";
+import MiaoShuDialog from "../../components/articleMiaoShuDialog";
 
 export default {
   name: "addArticle",
-
+  components:{
+    TitleDialog
+  },
   data() {
     return {
+       selectNum:0,
        article:{
          content:"",
          title:"",
@@ -25,6 +62,12 @@ export default {
 
   methods: {
 
+    changeTypeTo(x){
+      this.article.type = x;
+      if(x=="js") this.selectNum = 1;
+      if(x=="back") this.selectNum = 2;
+      if(x=="ai") this.selectNum = 3;
+    },
     async addArticle() {
       let _this = this;
       try {
@@ -43,6 +86,20 @@ export default {
       } finally {
 
       }
+    },
+
+    upadteTitleData(xx){
+      this.article.title = xx;
+    },
+    upadteMiaoShuData(xx){
+      this.article.miaoshu = xx;
+    },
+
+    titleClick(){
+      this.$refs.theTitleDialog.open();
+    },
+    miaoshuClick(){
+      this.$refs.theMiaoShuDialog.open();
     }
 
   }
@@ -50,6 +107,35 @@ export default {
 
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.type{
+  padding: 6px 20px 8px 20px;
+  border-radius: 8px;
+  background-color: #6ed0e3;
+  color: #fff;
+  font-weight: bold;
+  width: 120px;
+  text-align: center;
+  box-shadow: 0px 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.typeButton{
+  padding: 8px 15px 8px 15px;
+  border-radius: 8px;
+  background-color: #6bbeec;
+  margin-right: 15px;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0px 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.ti_jiao{
+  background-color: #45a351;
+  padding: 8px 15px 8px 15px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bolder;
+  box-shadow: 0px 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.selectButton{
+  background-color: #6b90ec;
+}
 </style>

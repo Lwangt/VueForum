@@ -39,6 +39,7 @@
               <p class="abstract">关于博客页面测试的一句话</p>
             </div>
 
+
             <div class="js-toc-content">
               <div class="pl20" style="border-radius: 10px">
 <!--                分析的文档区域-->
@@ -54,42 +55,11 @@
 <!--              v-html="blog.blog_content"-->
 <!--            ></div>-->
 
-<!--            <div>-->
-<!--              <mavon-editor v-model="blog.blog_content"/>-->
-<!--            </div>-->
-
             <div id="articlebtn">
               <el-row>
                 <el-tooltip class="love" content="点赞" placement="top">
                   <img @click="LikeBlog" class="icon" src="../../assets/dianzan.png" alt />
                 </el-tooltip>
-<!--                <el-popover placement="top" width="200" trigger="click">-->
-<!--                  <el-avatar-->
-<!--                    shape="square"-->
-<!--                    :size="200"-->
-<!--                    fit="fill"-->
-<!--                    :src="$store.state.siteInfo"-->
-<!--                  ></el-avatar>-->
-<!--                  <svg-->
-<!--                    slot="reference"-->
-<!--                    style="width: 2.25em!important;height: 2.25em!important;"-->
-<!--                    t="1614349031867"-->
-<!--                    class="icon"-->
-<!--                    viewBox="0 0 1024 1024"-->
-<!--                    version="1.1"-->
-<!--                    xmlns="http://www.w3.org/2000/svg"-->
-<!--                    p-id="6413"-->
-<!--                    width="200"-->
-<!--                    height="200"-->
-<!--                  >-->
-<!--                    <path d="M427.2 444h169.6V480H427.2z" fill="#FF5500" p-id="6414" />-->
-<!--                    <path-->
-<!--                      d="M512 0C229.6 0 0 229.6 0 512s229.6 512 512 512 512-229.6 512-512S794.4 0 512 0zM319.2 359.2h86.4c-7.2-14.4-16-27.2-25.6-40l31.2-11.2c11.2 14.4 20.8 31.2 28.8 51.2h54.4V304h35.2v55.2H584c10.4-16.8 20-34.4 28-52l32 11.2c-6.4 13.6-14.4 27.2-24 40.8h84.8v92h-33.6v-63.2H352v64.8h-32.8V359.2z m82.4 202.4v99.2h-32.8V532H656v123.2h-32.8V561.6H401.6z m-6.4-57.6V420h234.4V504H395.2z m95.2 183.2c-24 22.4-78.4 36.8-161.6 42.4l-13.6-30.4c74.4-3.2 123.2-14.4 146.4-32 20.8-17.6 33.6-47.2 36.8-88l33.6 2.4c-6.4 52.8-20 87.2-41.6 105.6z m196.8 45.6c-53.6-24-108-42.4-164.8-56l16.8-24.8C600 665.6 656 683.2 706.4 704l-19.2 28.8z"-->
-<!--                      fill="#FF5500"-->
-<!--                      p-id="6415"-->
-<!--                    />-->
-<!--                  </svg>-->
-<!--                </el-popover>-->
               </el-row>
             </div>
 
@@ -144,6 +114,24 @@ export default {
         page: 0
       },
       blog: {
+        blog_content3:"\n" +
+          "<p><strong>粗体</strong></p> <p>阿舒服比较浪费拉爆发力<br /> <sub>下角标</sub></p> <p><em>啥冯老师发卡机</em>::: hljs-left</p> <p>居左</p> <p>:::<s>中划线</s></p> <h1><a id=\"_12\"></a>司法解释鼓风机口</h1> <h2><a id=\"_13\"></a>沙发加拉杆</h2>",
+        blog_content2:"# 昂贵 #\n" +
+          "\n" +
+          "## 上课 ##\n" +
+          "\n" +
+          "是否gas开发岗\n" +
+          "爽肤水购房款\n" +
+          "++胡广生福卡高速费是217641感觉考试官方++\n" +
+          "\n" +
+          "```\n" +
+          "Vue.directive('highlight', function (el) {\n" +
+          "  const blocks = el.querySelectorAll('pre code')\n" +
+          "  blocks.forEach(block => {\n" +
+          "    hljs.highlightBlock(block)\n" +
+          "  })\n" +
+          "})\n" +
+          "```",
         blog_content:"# Redis学习总结\n" +
           "\n" +
           "## 1.简单介绍下Redis（Redis的含义和作用）\n" +

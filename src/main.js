@@ -10,6 +10,8 @@ import store from './store'
 import router from './router'
 
 import 'github-markdown-css/github-markdown.css'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 import hljs from 'highlight.js'
 
 import "./style/typo.css"
@@ -21,7 +23,7 @@ import "./style/typo.css"
 Vue.use(VRouter)
 Vue.use(VueResource)
 Vue.use(ElementUI)
-// Vue.use(mavonEditor)
+Vue.use(mavonEditor)
 
 Vue.directive('highlight', function (el) {
   const blocks = el.querySelectorAll('pre code')

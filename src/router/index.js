@@ -13,6 +13,7 @@ import DetailForPage from "../pages/book_details/forecast";
 import DetailPubPage from "../pages/book_details/publish";
 import searchPage from "../pages/searchPage";
 import ArticleDetailPage from "../pages/article/article_detail";
+import addArticle from "../pages/article/addArticle"
 
 let router=new VRouter({
   mode:'history',
@@ -74,6 +75,10 @@ let router=new VRouter({
     {
       path:'/articleDetail',
       component:ArticleDetailPage
+    },
+    {
+      path:'/addArticle',
+      component:addArticle
     }
   ]
 })
