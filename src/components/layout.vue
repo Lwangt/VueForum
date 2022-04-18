@@ -61,10 +61,10 @@
 
 <script>
 import Dialog from './base/dialog'
-import LogForm from './logForm'
-import RegForm from './regForm'
-import QuitForm from "./quitForm";
-import AboutDialog from  './aboutDialog'
+import LogForm from './dialog/logForm'
+import RegForm from './dialog/regForm'
+import QuitForm from "./dialog/quitForm";
+import AboutDialog from './dialog/aboutDialog'
 import searchBar from './searchBar'
 import poster from './poster'
 export default {

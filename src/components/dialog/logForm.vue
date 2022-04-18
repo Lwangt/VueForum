@@ -24,7 +24,7 @@
 
 <script>
 
-import {loginUrl} from "../services/login";
+import {loginUrl} from "../../services/login";
 import { mapMutations } from 'vuex';
 
 export default {

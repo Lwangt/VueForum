@@ -10,14 +10,17 @@
             <div :class="{'selectButton':selectNum===3}"  class="typeButton cursor-pointer" @click="changeTypeTo('ai')">人工智能</div>
           </div>
         </div>
-        <div class="flex flex-direction-column ml25 mb25">
+        <div class=" ml25 mb25">
           <div class="type" @click="titleClick()">文章标题</div>
         </div>
-        <div class="flex flex-direction-column ml25 mb25">
+        <div class=" ml25 mb25">
           <div class="type" @click="miaoshuClick()">文章简述</div>
         </div>
-        <div class="flex flex-direction-column ml25 mb25">
+        <div class=" ml25 mb25">
           <el-button class="ti_jiao" @click="addArticle()">提交</el-button>
+        </div>
+        <div class=" ml25 mb25">
+          <el-button class="ti_jiao" @click="saveArticle()">保存草稿</el-button>
         </div>
       </div>
       <div>
@@ -36,13 +39,14 @@
 
 <script>
 import {addArticle} from "../../services/article";
-import TitleDialog from "../../components/articleTitleDialog";
-import MiaoShuDialog from "../../components/articleMiaoShuDialog";
+import TitleDialog from "../../components/dialog/articleTitleDialog";
+import MiaoShuDialog from "../../components/dialog/articleMiaoShuDialog";
 
 export default {
   name: "addArticle",
   components:{
-    TitleDialog
+    TitleDialog,
+    MiaoShuDialog
   },
   data() {
     return {
@@ -87,6 +91,11 @@ export default {
 
       }
     },
+
+    saveArticle(){
+
+    },
+
 
     upadteTitleData(xx){
       this.article.title = xx;

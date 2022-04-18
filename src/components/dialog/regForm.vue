@@ -24,7 +24,7 @@
 
 <script>
 
-import {registerUrl} from "../services/register";
+import {registerUrl} from "../../services/register";
 
 export default {
   data () {
