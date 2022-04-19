@@ -3,7 +3,7 @@ import request from '../utils/request'
 export function addArticle (data) {
   return request({
     method: 'POST',
-    url: '/comment/addArticle',
+    url: '/article/addArticle',
     data,
   })
 }
@@ -11,7 +11,7 @@ export function addArticle (data) {
 export function deleteArticle (data) {
   return request({
     method: 'POST',
-    url: '/comment/deleteArticle',
+    url: '/article/deleteArticle',
     data,
   })
 }

@@ -29,7 +29,7 @@
 
       <div class="flex justify-content-center">
         <div class=" ml25 mb25" style="float: right">
-          <el-button class="ti_jiao" @click="addArticle()">提交</el-button>
+          <el-button class="ti_jiao" @click="submitClick()">提交</el-button>
         </div>
         <div class=" ml25 mb25" style="float: right">
           <el-button class="ti_jiao" @click="saveArticle()">保存草稿</el-button>
@@ -40,6 +40,7 @@
 
     <TitleDialog ref="theTitleDialog" @dialogEvent="upadteTitleData"></TitleDialog>
     <MiaoShuDialog ref="theMiaoShuDialog" @dialogEvent="upadteMiaoShuData"></MiaoShuDialog>
+    <submitArticleDialog ref="thesubmitArticleDialog" @dialogEvent="submitData"></submitArticleDialog>
 
   </div>
 
@@ -50,12 +51,15 @@
 import {addArticle} from "../../services/article";
 import TitleDialog from "../../components/dialog/articleTitleDialog";
 import MiaoShuDialog from "../../components/dialog/articleMiaoShuDialog";
+import submitArticleDialog from "../../components/dialog/submitArticleDialog";
+import axios from "axios";
 
 export default {
   name: "addArticle",
   components:{
     TitleDialog,
-    MiaoShuDialog
+    MiaoShuDialog,
+    submitArticleDialog
   },
   data() {
     return {
@@ -81,13 +85,22 @@ export default {
       if(x=="back") this.selectNum = 2;
       if(x=="ai") this.selectNum = 3;
     },
-    async addArticle() {
+    async submitData() {
       let _this = this;
       try {
         await addArticle({
-            article: _this.article
+          content: _this.article.content,
+          title: _this.article.title,
+          authorId: _this.article.author_id,
+          likeNum: _this.article.like_num,
+          readNum: _this.article.read_num,
+          commentNum: _this.article.comment_num,
+          miaoshu: _this.article.miaoshu,
+          type: _this.article.type
         }).then(res=>{
           if (res.data.code === 200) {
+            console.log("_this.article.author_id"+_this.article.author_id);
+            console.log("_this.article.comment_num"+_this.article.comment_num);
             this.$message.success("文章发布成功！")
           }
           else {
@@ -118,6 +131,9 @@ export default {
     },
     miaoshuClick(){
       this.$refs.theMiaoShuDialog.open();
+    },
+    submitClick(){
+      this.$refs.thesubmitArticleDialog.open();
     }
 
   }
