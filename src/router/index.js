@@ -76,7 +76,7 @@ let router=new VRouter({
       ]
     },
     {
-      path:'/search/:searchText',
+      path:'/search',
       component:searchPage
     },
     {

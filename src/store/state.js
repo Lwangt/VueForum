@@ -16,5 +16,7 @@ export default {
 	  id:null,
 	  name:'',
     password:''
-  }
+  },
+
+  searchItem:'',
 }

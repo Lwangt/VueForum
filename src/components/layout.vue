@@ -6,7 +6,9 @@
           <img src="../assets/aiti_community.png" width="30px">
          </router-link>
 
-        <div class="sBar"><search-bar></search-bar></div>
+        <div class="sBar">
+          <searchBar @wantToSearch="DoTheSearchWork()"></searchBar>
+        </div>
         <div class="head-nav" v-if="isReloadData">
           <ul class="nav-list" v-if="isLogin">
             <li @click="userCenterClick">个人中心</li>

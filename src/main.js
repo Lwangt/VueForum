@@ -20,6 +20,8 @@ import "./style/typo.css"
 // import 'mavon-editor/dist/css/index.css'
 
 // Vue.config.productionTip = false
+
+
 Vue.use(VRouter)
 Vue.use(VueResource)
 Vue.use(ElementUI)
@@ -49,9 +51,9 @@ Vue.prototype.scrollToTop = function () {
     }
   }
   rAF(frameFunc)
-}
+};
 
-;
+Vue.prototype.bus = new Vue();
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,14 +1,16 @@
 <template>
     <div class="round-search-bar">
-        <input class="input-search" v-model="searchText" placeholder="搜索问题和关键字"  @keydown.enter='doSearch'>
-        <button class="btn-search" @click='doSearch' >
+        <input class="input-search" v-model="searchText" placeholder="搜索问题和关键字"  @keydown.enter='doSearch()'>
+        <button class="btn-search" @click='doSearch()' >
             <img class="icon-search" src="./../assets/search.png">
         </button>
     </div>
 </template>
 
 <script>
-import Util from "@/common/Util"
+
+import Util from "../common/Util";
+
 export default {
     data(){
         return{
@@ -17,8 +19,15 @@ export default {
     },
     methods:{
         doSearch(){
-            console.log(this.$router)
-            Util.searchAPI(this.$router,this.searchText)
+          // if (this.$route.path !== "/search")
+          //   Util.searchAPI(this.$router,this.searchText)
+
+          this.$store.state.searchItem = this.searchText;
+
+          if (this.$route.path !== "/search")
+              this.$router.push({ path: "/search"});
+
+
         }
     }
 }

@@ -71,7 +71,7 @@ export default {
          like_num:0,
          read_num:0,
          comment_num:0,
-         miaoshu:"",
+         introduction:"",
          type:""
        }
     };
@@ -95,7 +95,7 @@ export default {
           likeNum: _this.article.like_num,
           readNum: _this.article.read_num,
           commentNum: _this.article.comment_num,
-          miaoshu: _this.article.miaoshu,
+          introduction: _this.article.introduction,
           type: _this.article.type
         }).then(res=>{
           if (res.data.code === 200) {
@@ -123,7 +123,7 @@ export default {
       this.article.title = xx;
     },
     upadteMiaoShuData(xx){
-      this.article.miaoshu = xx;
+      this.article.introduction = xx;
     },
 
     titleClick(){
