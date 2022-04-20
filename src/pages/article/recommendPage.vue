@@ -15,8 +15,8 @@
 <script>
 import contentText from './../../components/contentText'
 import card from './../../components/base/card'
-import {getArticleListByType} from "../../services/article"
 import {getUserNameById} from  '../../services/user'
+import {getArticleListRandom} from "../../services/article"
 export default {
     data(){
         return{
@@ -109,9 +109,7 @@ export default {
     async getArticleList() {
       let _this = this;
       try {
-        await getArticleListByType({
-          type: "js",
-        }).then(res=>{
+        await getArticleListRandom().then(res=>{
           if (res.data.code === 200) {
             _this.articleList = res.data.data;
             _this.addNametoList();
