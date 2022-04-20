@@ -2,7 +2,7 @@
     <div class="index-wrap">
     <div class="index-left">
       <div class="index-left-block">
-        <h2><i class="el-icon-loading"></i>&nbsp;&nbsp;近期热门</h2>
+        <h2><i class="el-icon-loading"></i>&nbsp;&nbsp; 近期热门</h2>
         <div v-for="product in productList" :key="product.id">
             <h3>{{ product.title }}<span class="h3-line">  ————————</span></h3>
             <ul>
@@ -15,50 +15,30 @@
             </ul>
             <div v-if="!product.last" class="hr"></div>
         </div>
-        <h2 @click="goToPage()"><i class="el-icon-s-management"></i>&nbsp;&nbsp;发布文章</h2>
+        <h2 @click="goToAddArticlePage()"><i class="el-icon-s-promotion"></i>&nbsp;&nbsp; 发布文章</h2>
+
+        <h2 @click="goToBookPage()"><i class="el-icon-s-management" ></i>&nbsp;&nbsp; 推荐书籍</h2>
       </div>
       <div class="index-left-block lastest-news">
-        <h2><i class="el-icon-s-custom"></i>&nbsp;&nbsp;合作伙伴</h2>
+        <h2><i class="el-icon-s-custom"></i>&nbsp;&nbsp; 合作伙伴</h2>
         <ul>
-          <li v-for="item in newsList" :key="item.id">
-              <a :href="item.url">{{item.title}}</a>
+          <li v-for="item in newsList" :key="item.id" @click="goToUrl(item.url)">
+              {{item.title}}
           </li>
         </ul>
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides="slides" :inv="3000" ></slide-show>
-
-      <div style="margin-top: 50px; margin-bottom: 30px; margin-left: 20px;">
-        <div style="color: white;font-weight: bold;border-radius: 7px;background-color: #7eb6ed;padding: 12px;">· 今日书籍推荐</div>
-      </div>
-
-      <div class="index-board-list">
-        <div
-        class="index-board-item"
-        v-for="(item,index) in boardList" :key="item.id"
-        :class="[{'line-last':index % 2 !==0},'index-board-'+item.id]">
-            <div class="index-board-item-inner">
-                <h2>{{item.title}}</h2>
-                <p>{{item.description}}</p>
-                <div class="index-board-button">
-                    <a href="detail/analysis" class="button">立即购买</a>
-                </div>
-            </div>
-        </div>
-      </div>
-      <div class="index-content">
-
-      </div>
+      <recommendPage></recommendPage>
     </div>
   </div>
 </template>
 
 <script>
-import slideShow from '../components/slideShow'
+import recommendPage from "./article/recommendPage";
 export default {
   components:{
-    slideShow
+    recommendPage
   },
     created:function(){
         this.$http.get('api/newsList')
@@ -72,7 +52,7 @@ export default {
 
     data(){
         return{
-                slides: [
+            slides: [
                 {
                   src: require('../assets/slideShow/pic1.jpg'),
                   title: 'xxx1',
@@ -173,7 +153,7 @@ export default {
     },
 
   methods:{
-    goToPage() {
+    goToAddArticlePage() {
       let routeData = this.$router.resolve({
         path: "/addArticle",
       });
@@ -181,6 +161,20 @@ export default {
       //打开新页面
       window.open(routeData.href, '_blank');
     },
+    goToBookPage() {
+      let routeData = this.$router.resolve({
+        path: "/bookIndex",
+      });
+
+      //打开新页面
+      window.open(routeData.href, '_blank');
+    },
+    goToUrl(uu){
+
+      //打开新页面
+      let ss = 'http://'+uu;
+      window.open(ss);
+    }
   }
 }
 </script>
@@ -322,5 +316,16 @@ export default {
 .hot-tag{
     background-color: red;
     color: #fff;
+}
+.right-content{
+  width:100%;
+  margin-top: 20px;
+}
+.right-title{
+  display: inline-block;
+  width:100%;
+  margin-top: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
 }
 </style>

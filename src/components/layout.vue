@@ -230,7 +230,7 @@ body {
   height: 90px;
   line-height: 90px;
   width: 100%;
-  border-top: 3px solid #408080;
+  /*border-top: 3px solid #408080;*/
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 
 }

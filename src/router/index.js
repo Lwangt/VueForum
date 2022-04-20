@@ -6,6 +6,8 @@ import articalPage from "../pages/articlePage";
 import jsPage from "../pages/article/jsPage";
 import backPage from "../pages/article/backPage";
 import aiPage from "../pages/article/aiPage";
+import recommendPage from "../pages/article/recommendPage";
+import bookIndex from "../pages/book/bookIndex";
 import DetailPage from "../pages/detail";
 import DetailAnaPage from "../pages/book_details/analysis";
 import DetailCountPage from "../pages/book_details/count";
@@ -14,6 +16,7 @@ import DetailPubPage from "../pages/book_details/publish";
 import searchPage from "../pages/searchPage";
 import ArticleDetailPage from "../pages/article/article_detail";
 import addArticle from "../pages/article/addArticle"
+import centerIndex from "../pages/center/centerIndex";
 
 let router=new VRouter({
   mode:'history',
@@ -31,6 +34,10 @@ let router=new VRouter({
       component:articalPage,
       redirect:'/article/js',
       children:[
+        {
+          path:'recommend',
+          component:recommendPage
+        },
         {
           path:'js',
           component:jsPage
@@ -79,6 +86,14 @@ let router=new VRouter({
     {
       path:'/addArticle',
       component:addArticle
+    },
+    {
+      path:'/center',
+      component:centerIndex
+    },
+    {
+      path:'/bookIndex',
+      component:bookIndex
     }
   ]
 })

@@ -114,24 +114,6 @@ export default {
         page: 0
       },
       blog: {
-        blog_content3:"\n" +
-          "<p><strong>粗体</strong></p> <p>阿舒服比较浪费拉爆发力<br /> <sub>下角标</sub></p> <p><em>啥冯老师发卡机</em>::: hljs-left</p> <p>居左</p> <p>:::<s>中划线</s></p> <h1><a id=\"_12\"></a>司法解释鼓风机口</h1> <h2><a id=\"_13\"></a>沙发加拉杆</h2>",
-        blog_content2:"# 昂贵 #\n" +
-          "\n" +
-          "## 上课 ##\n" +
-          "\n" +
-          "是否gas开发岗\n" +
-          "爽肤水购房款\n" +
-          "++胡广生福卡高速费是217641感觉考试官方++\n" +
-          "\n" +
-          "```\n" +
-          "Vue.directive('highlight', function (el) {\n" +
-          "  const blocks = el.querySelectorAll('pre code')\n" +
-          "  blocks.forEach(block => {\n" +
-          "    hljs.highlightBlock(block)\n" +
-          "  })\n" +
-          "})\n" +
-          "```",
         blog_content:"# Redis学习总结\n" +
           "\n" +
           "## 1.简单介绍下Redis（Redis的含义和作用）\n" +
