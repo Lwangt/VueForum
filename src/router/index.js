@@ -78,9 +78,6 @@ let router=new VRouter({
     {
       path:'/search',
       component:searchPage,
-      meta:{
-        layout:'searchPage'
-      }
     },
     {
       path:'/articleDetail',

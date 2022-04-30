@@ -27,7 +27,6 @@ export default {
           if (this.$route.path !== "/search")
               this.$router.push({ path: "/search"});
 
-
         }
     }
 }

@@ -3,11 +3,18 @@
     <div class="app-head">
       <div class="app-head-inner">
         <router-link :to="{path: '/'}">
-          <img src="../assets/aiti_community.png" width="30px">
+          <img class="headImg" src="../assets/aiti_community.png" width="30px">
          </router-link>
 
         <div class="sBar">
-          <searchBar @wantToSearch="DoTheSearchWork()"></searchBar>
+          <div>
+            <div class="top-round-search-bar">
+              <input class="top-input-search" v-model="searchText" placeholder="搜索问题和关键字"  @keydown.enter='doSearch()'>
+              <button class="top-btn-search" @click='doSearch()' >
+                <img class="top-icon-search" src="./../assets/search.png">
+              </button>
+            </div>
+          </div>
         </div>
         <div class="head-nav" v-if="isReloadData">
           <ul class="nav-list" v-if="isLogin">
@@ -35,7 +42,7 @@
     <div class="container">
 
       <keep-alive>
-        <router-view></router-view>
+        <router-view ref='routerViewPlace'></router-view>
       </keep-alive>
 
     </div>
@@ -69,6 +76,7 @@ import QuitForm from "./dialog/quitForm";
 import AboutDialog from './dialog/aboutDialog'
 import searchBar from './searchBar'
 import poster from './poster'
+import searchPage from "../pages/searchPage";
 export default {
   components:{
     MyDialog:Dialog,
@@ -77,7 +85,8 @@ export default {
     QuitForm,
     AboutDialog,
     searchBar,
-    poster
+    poster,
+    searchPage
   },
   data(){
     return {
@@ -89,7 +98,8 @@ export default {
       isShowQuitDialog:false,
       username:'',
       showPost:true,
-      path:''
+      path:'',
+      searchText:''
     }
   },
   mounted() {
@@ -153,7 +163,23 @@ export default {
     closePost(){
       console.log("xx")
       this.showPost=false
+    },
+
+    doSearch(){
+      // if (this.$route.path !== "/search")
+      //   Util.searchAPI(this.$router,this.searchText)
+
+      // this.$store.state.searchItem = this.searchText;
+
+      if (this.$route.path !== "/search")
+        this.$router.push({ path: "/search"});
+
+      this.$nextTick(() => {
+        this.$refs['routerViewPlace'].search(this.searchText)
+      })
+
     }
+
   }
 
   }
@@ -221,7 +247,6 @@ body {
 }
 .sBar{
   height: 100px;
-  width: 400px;
   margin-top:28px;
   margin-left: 130px;
   display: inline-block;
@@ -243,7 +268,7 @@ body {
 .head-logo {
   float: left;
 }
-.app-head-inner img {
+.headImg {
   width: 170px;
   margin-top: 10px;
 }
@@ -276,6 +301,38 @@ body {
   width: 100%;
   margin: 0 auto;
   background-color: #fff;
+}
+
+.top-round-search-bar{
+  width:400px;
+  position:relative;
+  display:inline-block;
+  top:-27px;
+}
+.top-input-search{
+  width:400px;
+  height:50px;
+  border-radius:25px;
+  border:1px solid #e7e7e7;
+  padding:20px;
+  box-sizing:border-box;
+  outline:none;
+  font-size:18px;
+}
+.top-btn-search{
+  cursor:pointer;
+  height:60px;
+  position:absolute;
+  right:15px;
+  background:none;
+  top:50%;
+  transform:translateY(-47%);
+  border:none;
+  outline:none;
+}
+.top-icon-search{
+  width:30px;
+  height:30px;
 }
 .hr {
   height: 1px;

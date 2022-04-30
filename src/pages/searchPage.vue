@@ -28,26 +28,32 @@
         <div class="card"><card/></div>
         <span class="tip">挨踢社区为你找到了约 {{this.searchResultList.length}} 条结果</span>
 
-        <div v-if="this.searchType === 1 || this.searchType === 2" class="search-page" v-for="item in searchResultList" :key="item.id">
-            <div>
-              <contentText v-if="isReloadData" :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>
-            </div>
-        </div>
+        <div v-if="this.mountStatus">
 
-        <div v-if="this.searchType === 3" class="search-page" v-for="item in searchResultList" :key="item.id">
-          <div>
-            id: {{item.id}}
-            用户昵称： {{item.name}}
-          </div>
-        </div>
+          <div>{{searchResultList[0].id}}</div>
+          <div>{{searchResultList[0].name}}</div>
 
-        <div v-if="this.searchType === 4" class="search-page" v-for="item in searchResultList" :key="item.id">
-          <div>
-            id: {{item.id}}
-            评论内容： {{item.name}}
-          </div>
-        </div>
+<!--          <div v-if="(this.searchType!=undefined && this.searchType == 1) || this.searchType!=undefined && this.searchType == 2" class="search-page" v-for="item in searchResultList" :key="item.id">-->
+<!--            <div>-->
+<!--              <contentText v-if="isReloadData" :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>-->
+<!--            </div>-->
+<!--          </div>-->
 
+<!--          <div v-if="this.searchType!=undefined && this.searchType == 3" class="search-page" v-for="item in searchResultList" :key="item.id">-->
+<!--            <div>-->
+<!--              id: {{item.id}}-->
+<!--              用户昵称： {{item.name}}-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div v-if="this.searchType!=undefined && this.searchType == 4" class="search-page" v-for="item in searchResultList" :key="item.id">-->
+<!--            <div>-->
+<!--              id: {{item.id}}-->
+<!--              评论内容： {{item.name}}-->
+<!--            </div>-->
+<!--          </div>-->
+
+        </div>
 
     </div>
 </template>
@@ -70,37 +76,34 @@ export default {
         searchResultList:[],
         activeIndex: '1',
         searchText:'',
+        mountStatus: false,
       }
   },
   watch:{
-    '$store.state.searchItem': {
-      handler() {
-        // console.log("监听searchText发生了变化" + this.$store.state.searchItem );
-        this.searchText = this.$store.state.searchItem;
-        this.handleSelect();
-      },
-      immediate: true
-    }
+    // '$store.state.searchItem': {
+    //   handler() {
+    //     // console.log("监听searchText发生了变化" + this.$store.state.searchItem );
+    //     this.searchText = this.$store.state.searchItem;
+    //     this.handleSelect();
+    //   },
+    //   immediate: true
+    // }
   },
   mounted() {
-    this.search();
-    this.ll();
+    // this.search();
+    this.mountStatus = true
   },
   created() {
 
   },
   methods:{
-
-    ll(){
-      console.log("llllllllllllll")
-    },
     handleSelect(key, keyPath) {
       console.log("########## handleSelect ###########")
       // console.log(key, keyPath);
       if(keyPath[0]=='5'){
         this.arType = key;
       }else{
-        this.searchType = key;
+        this.searchType = Number(key);
       }
       // console.log("searchType");
       // console.log(this.searchType);
@@ -109,12 +112,14 @@ export default {
       this.search();
     },
 
-    async search(){
-      console.log("########## search ###########")
-      if(this.searchType === 1) await this.searchByArticleTitleMethod();
-      if(this.searchType === 2) await this.searchByArticleContentMethod();
-      if(this.searchType === 3) await this.searchByUserNameMethod();
-      if(this.searchType === 4) await this.searchByCommentMethod();
+    search(aaa){
+      if(aaa!=undefined) this.searchText = aaa;
+      console.log("########## searchText ###########" + this.searchText)
+      console.log("########## searchType ###########" + this.searchType)
+      if(this.searchType == 1) this.searchByArticleTitleMethod();
+      else if(this.searchType == 2) this.searchByArticleContentMethod();
+      else if(this.searchType == 3) this.searchByUserNameMethod();
+      else if(this.searchType == 4) this.searchByCommentMethod();
     },
 
     async searchByArticleTitleMethod(){
@@ -174,6 +179,7 @@ export default {
         }).then(res=>{
           if (res.data.code === 200) {
             _this.searchResultList = res.data.data;
+            console.log(_this.searchResultList)
           }
           else {
             this.$message.error(res.data.msg)
