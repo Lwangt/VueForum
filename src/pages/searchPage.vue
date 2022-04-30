@@ -26,7 +26,7 @@
         </div>
 
         <div class="card"><card/></div>
-        <span class="tip">德布脑内为你找到了约 {{this.searchResultList.length}} 条结果</span>
+        <span class="tip">挨踢社区为你找到了约 {{this.searchResultList.length}} 条结果</span>
 
         <div v-if="this.searchType === 1 || this.searchType === 2" class="search-page" v-for="item in searchResultList" :key="item.id">
             <div>

@@ -2,7 +2,7 @@
 import VRouter from "vue-router";
 import IndexPage from "../pages/IndexPage";
 import OrderListPage from "../pages/orderList";
-import articalPage from "../pages/articlePage";
+import articlePage from "../pages/articlePage";
 import jsPage from "../pages/article/jsPage";
 import backPage from "../pages/article/backPage";
 import aiPage from "../pages/article/aiPage";
@@ -31,7 +31,7 @@ let router=new VRouter({
     },
     {
       path:'/article',
-      component:articalPage,
+      component:articlePage,
       redirect:'/article/js',
       children:[
         {
@@ -77,7 +77,10 @@ let router=new VRouter({
     },
     {
       path:'/search',
-      component:searchPage
+      component:searchPage,
+      meta:{
+        layout:'searchPage'
+      }
     },
     {
       path:'/articleDetail',
