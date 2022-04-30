@@ -34,15 +34,6 @@ export default {
   components:{
     slideShow
   },
-  created:function(){
-    this.$http.get('api/newsList')
-      .then((res)=>{
-          this.newsList=res.data;
-        },(err)=>{
-          console.log(err);
-        }
-      )
-  },
 
   data(){
     return{
