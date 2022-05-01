@@ -53,6 +53,7 @@ import TitleDialog from "../../components/dialog/articleTitleDialog";
 import MiaoShuDialog from "../../components/dialog/articleMiaoShuDialog";
 import submitArticleDialog from "../../components/dialog/submitArticleDialog";
 import axios from "axios";
+import { mapMutations } from 'vuex';
 
 export default {
   name: "addArticle",
@@ -115,6 +116,14 @@ export default {
     },
 
     saveArticle(){
+
+      let _this = this;
+      // console.log("111111111111")
+      // console.log(this.article)
+      //保存文章信息到vuex中
+      this.$store.dispatch('storeArticleMessage',_this.article)
+      // console.log("222222222222")
+      // console.log(this.$store.state.articleMessage)
 
     },
 

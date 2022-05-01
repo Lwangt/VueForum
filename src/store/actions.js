@@ -3,6 +3,7 @@ import {
   SAVE_INTRODUCTION,
   SET_IS_BLOG_RENDER_COMPLETE,
   STORE_USER_MESSAGE,
+  STORE_ARTICLE_MESSAGE
 } from "./mutations-types";
 
 
@@ -18,5 +19,8 @@ export default {
 	},
   storeUserMessage({commit}, user) {
     commit(STORE_USER_MESSAGE, {user})
+  },
+  storeArticleMessage({commit}, article) {
+    commit(STORE_ARTICLE_MESSAGE, {article})
   }
 }

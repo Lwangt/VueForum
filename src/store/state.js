@@ -15,8 +15,12 @@ export default {
   userMessage:{
 	  id:null,
 	  name:'',
-    password:''
+    password:'',
   },
 
+  //文章信息
+  articleMessage:{
+  }
   // searchItem:'',
+
 }
