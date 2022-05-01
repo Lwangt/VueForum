@@ -12,12 +12,13 @@
             active-text-color="#ffd04b">
 
             <el-menu-item index="1">文章标题</el-menu-item>
-            <el-menu-item index="2">文章内容</el-menu-item>
+            <el-menu-item index="2">文章简述</el-menu-item>
             <el-submenu index="5">
               <template slot="title">文章分类</template>
               <el-menu-item index="js">前端</el-menu-item>
               <el-menu-item index="back">后端</el-menu-item>
               <el-menu-item index="ai">人工智能</el-menu-item>
+              <el-menu-item index="no">不分类</el-menu-item>
             </el-submenu>
 
             <el-menu-item index="3">用户昵称</el-menu-item>
@@ -30,28 +31,51 @@
 
         <div v-if="this.mountStatus">
 
-          <div>{{searchResultList[0].id}}</div>
-          <div>{{searchResultList[0].name}}</div>
-
-<!--          <div v-if="(this.searchType!=undefined && this.searchType == 1) || this.searchType!=undefined && this.searchType == 2" class="search-page" v-for="item in searchResultList" :key="item.id">-->
-<!--            <div>-->
-<!--              <contentText v-if="isReloadData" :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>-->
+<!--          <div v-if="isReloadData" class="search-page" v-for="item in searchResultList" :key="item.id">-->
+<!--            <div v-if="searchType == 1">-->
+<!--              <contentText :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>-->
 <!--            </div>-->
-<!--          </div>-->
-
-<!--          <div v-if="this.searchType!=undefined && this.searchType == 3" class="search-page" v-for="item in searchResultList" :key="item.id">-->
-<!--            <div>-->
+<!--            <div v-else-if="searchType == 2">-->
+<!--              <contentText :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>-->
+<!--            </div>-->
+<!--            <div v-else-if="searchType == 3">-->
 <!--              id: {{item.id}}-->
 <!--              用户昵称： {{item.name}}-->
 <!--            </div>-->
-<!--          </div>-->
-
-<!--          <div v-if="this.searchType!=undefined && this.searchType == 4" class="search-page" v-for="item in searchResultList" :key="item.id">-->
-<!--            <div>-->
+<!--            <div v-else>-->
 <!--              id: {{item.id}}-->
 <!--              评论内容： {{item.name}}-->
 <!--            </div>-->
 <!--          </div>-->
+
+          <div v-if="isReloadData  && searchType == 1" class="search-page">
+            <div v-for="(item,index) in searchResultList" :key="index">
+              <contentText :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>
+            </div>
+          </div>
+
+          <div v-else-if="isReloadData  && searchType == 2" class="search-page">
+            <div v-for="(item,index) in searchResultList" :key="index">
+              <contentText :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>
+            </div>
+          </div>
+
+          <div v-else-if="isReloadData  && searchType == 3" class="search-page">
+            <div v-for="(item,index) in searchResultList" :key="index">
+              <contentTextTwo :name="item.name" :intro="item.intro" :sex="item.sex" :likeNum="item.followAccount" :fanNum="item.fanAccount" :time="item.createTime"/>
+            </div>
+          </div>
+
+          <div v-else-if="isReloadData" class="search-page">
+            <div v-for="(item,index) in searchResultList" :key="index">
+              id: {{item.id}}
+              评论内容： {{item.name}}
+            </div>
+          </div>
+
+<!--          <div style="margin-left: 200px; color: #7b7b7b"> 到底啦 </div>-->
+
+
 
         </div>
 
@@ -61,12 +85,14 @@
 <script>
 import card from './../components/base/card'
 import contentText from './../components/contentText'
-import {searchByArticleContent,searchByComment,searchByArticleTitle,searchByUserName} from "../services/search"
+import contentTextTwo from "../components/contentTextTwo";
+import {searchByArticleIntroduction,searchByComment,searchByArticleTitle,searchByUserName} from "../services/search"
 
 export default {
 
   components:{
     contentText,
+    contentTextTwo,
     card
   },
   data(){
@@ -77,6 +103,7 @@ export default {
         activeIndex: '1',
         searchText:'',
         mountStatus: false,
+        isReloadData:true
       }
   },
   watch:{
@@ -105,8 +132,8 @@ export default {
       }else{
         this.searchType = Number(key);
       }
-      // console.log("searchType");
-      // console.log(this.searchType);
+      console.log("searchType");
+      console.log(this.searchType);
       // console.log("arType");
       // console.log(this.arType);
       this.search();
@@ -114,12 +141,16 @@ export default {
 
     search(aaa){
       if(aaa!=undefined) this.searchText = aaa;
-      console.log("########## searchText ###########" + this.searchText)
-      console.log("########## searchType ###########" + this.searchType)
+      console.log("########## searchText = " + this.searchText)
+      console.log("########## searchType1 = " + this.searchType)
       if(this.searchType == 1) this.searchByArticleTitleMethod();
-      else if(this.searchType == 2) this.searchByArticleContentMethod();
+      else if(this.searchType == 2) this.searchByArticleIntroductionMethod();
       else if(this.searchType == 3) this.searchByUserNameMethod();
       else if(this.searchType == 4) this.searchByCommentMethod();
+      this.isReloadData = false;
+      this.$nextTick(()=>{
+        this.isReloadData = true;
+      })
     },
 
     async searchByArticleTitleMethod(){
@@ -136,6 +167,7 @@ export default {
           console.log(res);
           if (res.data.code === 200) {
             _this.searchResultList = res.data.data;
+            console.log("########## searchType2 = " + _this.searchType)
           }
           else {
             this.$message.error(res.data.msg)
@@ -147,14 +179,14 @@ export default {
       }
     },
 
-    async searchByArticleContentMethod(){
+    async searchByArticleIntroductionMethod(){
       let _this = this;
       var artType = null;
       if(_this.arType === 'js') artType = 'js';
       if(_this.arType === 'back') artType = 'back';
       if(_this.arType === 'ai') artType = 'ai';
       try {
-        await searchByArticleContent({
+        await searchByArticleIntroduction({
           content: _this.searchText,
           type: artType
         }).then(res=>{

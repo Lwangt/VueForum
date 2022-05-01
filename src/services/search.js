@@ -8,10 +8,10 @@ export function searchByArticleTitle (data) {
   })
 }
 
-export function searchByArticleContent (data) {
+export function searchByArticleIntroduction (data) {
   return request({
     method: 'POST',
-    url: '/searchByArticleContent',
+    url: '/searchByArticleIntroduction',
     data,
   })
 }
