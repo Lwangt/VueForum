@@ -48,32 +48,32 @@
 <!--            </div>-->
 <!--          </div>-->
 
-          <div v-if="isReloadData  && searchType == 1" class="search-page">
-            <div v-for="(item,index) in searchResultList" :key="index">
+          <div v-if="isReloadData  && searchType == 1" class="search-page" >
+            <div v-for="(item,index) in searchResultList" :key="index" @click="goToPage(item.articleId)">
               <contentText :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>
             </div>
-            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦)</div>
+            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦……)</div>
           </div>
 
           <div v-else-if="isReloadData  && searchType == 2" class="search-page">
-            <div v-for="(item,index) in searchResultList" :key="index">
+            <div v-for="(item,index) in searchResultList" :key="index" @click="goToPage(item.articleId)">
               <contentText :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>
             </div>
-            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦)</div>
+            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦……)</div>
           </div>
 
           <div v-else-if="isReloadData  && searchType == 3" class="search-page">
             <div v-for="(item,index) in searchResultList" :key="index">
               <contentTextTwo :name="item.name" :intro="item.intro" :sex="item.sex" :likeNum="item.followAccount" :fanNum="item.fanAccount" :time="item.createTime"/>
             </div>
-            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦)</div>
+            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦……)</div>
           </div>
 
           <div v-else-if="isReloadData" class="search-page">
-            <div v-for="(item,index) in searchResultList" :key="index">
+            <div v-for="(item,index) in searchResultList" :key="index" @click="goToPage(item.articleId)">
               <contentTextThree :nickName="item.nickName" :content="item.content" :commentCount="item.commentCount" :createTime="item.createTime"/>
             </div>
-            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦)</div>
+            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦……)</div>
           </div>
 
 <!--          <div style="margin-left: 200px; color: #7b7b7b"> 到底啦 </div>-->
@@ -245,6 +245,19 @@ export default {
         console.log(e)
       } finally {
       }
+    },
+
+    goToPage(id) {
+      let routeData = this.$router.resolve({
+        path: "/articleDetail",
+        query: {
+          id:id
+        }
+      });
+
+      //必要操作，否则不会打开新页面
+      window.open(routeData.href, '_blank');
+      console.log("id = "+ id )
     }
 
   }

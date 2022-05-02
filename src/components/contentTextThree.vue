@@ -26,8 +26,11 @@ export default {
       'commentCount',
       'content',
       'nickName',
-      'createTime'
-    ]
+      'createTime',
+    ],
+
+  methods:{
+  }
 }
 </script>
 
