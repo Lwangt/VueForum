@@ -24,3 +24,10 @@ export function getCommentListByArticleId (data) {
   })
 }
 
+export function sendComment (data) {
+  return request({
+    method: 'POST',
+    url: '/comment/sendComment',
+    data,
+  })
+}

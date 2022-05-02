@@ -52,25 +52,28 @@
             <div v-for="(item,index) in searchResultList" :key="index">
               <contentText :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>
             </div>
+            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦)</div>
           </div>
 
           <div v-else-if="isReloadData  && searchType == 2" class="search-page">
             <div v-for="(item,index) in searchResultList" :key="index">
               <contentText :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>
             </div>
+            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦)</div>
           </div>
 
           <div v-else-if="isReloadData  && searchType == 3" class="search-page">
             <div v-for="(item,index) in searchResultList" :key="index">
               <contentTextTwo :name="item.name" :intro="item.intro" :sex="item.sex" :likeNum="item.followAccount" :fanNum="item.fanAccount" :time="item.createTime"/>
             </div>
+            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦)</div>
           </div>
 
           <div v-else-if="isReloadData" class="search-page">
             <div v-for="(item,index) in searchResultList" :key="index">
-              id: {{item.id}}
-              评论内容： {{item.name}}
+              <contentTextThree :nickName="item.nickName" :content="item.content" :commentCount="item.commentCount" :createTime="item.createTime"/>
             </div>
+            <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦)</div>
           </div>
 
 <!--          <div style="margin-left: 200px; color: #7b7b7b"> 到底啦 </div>-->
@@ -86,6 +89,7 @@
 import card from './../components/base/card'
 import contentText from './../components/contentText'
 import contentTextTwo from "../components/contentTextTwo";
+import contentTextThree from "../components/contentTextThree";
 import {searchByArticleIntroduction,searchByComment,searchByArticleTitle,searchByUserName} from "../services/search"
 
 export default {
@@ -93,6 +97,7 @@ export default {
   components:{
     contentText,
     contentTextTwo,
+    contentTextThree,
     card
   },
   data(){

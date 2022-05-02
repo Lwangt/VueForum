@@ -1,44 +1,83 @@
 <template>
   <div class="container">
     <div class="fs22 pl5">评论区</div>
-    <div class="ml10 mt20 flex" v-for="item in comments">
-      <div class="mr15" style="width: 50px;height: 50px;background-color: #8ccded;margin-top: 2px">
-      </div>
-      <div class="flex flex-direction-column">
-       <div class="flex" style="margin-top: 20px;">
-         <div >{{item.nickName}}</div>
-         <div class="ml20" style="color: #cccccc">{{item.createTime}}</div>
-       </div>
-        <div class="mt15">
-          <div>{{item.content}}</div>
-        </div>
-        <div class="mt15">
-          <div @click="huifu()" style="color: #96e6dd;font-size: 15px;cursor:pointer">回复</div>
+    <div class="flex mt35" style="margin-left: 10px">
+      <div class="mr15" style="width: 50px;height: 50px;background-color: #8ccded;border-radius: 8px"></div>
+      <input class="comment_input" v-model="textToSend" ></input>
+      <div >
+        <div class="input_button flex align-items-center justify-content-center cursor-pointer" @click="send()">
+          {{ this.buttonText }}
         </div>
       </div>
+    </div>
+    <!--     一层循环-->
+    <div class="ml10 mt20" v-for="item in comments">
+      <div class="flex">
+        <div class="mr15" style="width: 50px;height: 50px;background-color: #8ccded;margin-top: 18px;border-radius: 8px">
+        </div>
+        <div class="flex flex-direction-column">
+          <div class="flex" style="margin-top: 20px;">
+            <div >{{item.nickName}}</div>
+            <div class="ml20" style="color: #cccccc">{{item.createTime}}</div>
+          </div>
+          <div class="mt15">
+            <div>{{item.content}}</div>
+          </div>
+          <div class="mt15 flex">
+            <div style="color: #ced3d2;font-size: 15px;">共{{item.commentCount}}条回复&nbsp&nbsp</div>
+            <div @click="huifu(item.id,item.nickName,1)" style="color: #96e6dd;font-size: 15px;cursor:pointer">回复</div>
+          </div>
+        </div>
+      </div>
+      <!--     二层循环-->
+      <div class="ml80 flex flex-direction-column" v-for="item in item.children">
+        <div class="flex mt10">
+          <div class="mr15" style="width: 40px;height: 40px;background-color: #8ccded;margin-top: 25px;border-radius: 6px">
+          </div>
+          <div class="flex flex-direction-column">
+            <div class="flex" style="margin-top: 20px;">
+              <div>{{item.nickName}}</div>
+              <div v-if="item.toWho" style="color: #dbdada;font-size: 12px;margin-top: 2px;">&nbsp&nbsp▶&nbsp&nbsp</div>
+              <div v-if="item.toWho">{{item.toWho}}</div>
+              <div class="ml20" style="color: #cccccc">{{item.createTime}}</div>
+            </div>
+            <div class="mt15">
+              <div>{{item.content}}</div>
+            </div>
+            <div class="mt15 flex">
+              <div style="color: #ced3d2;font-size: 15px;">共{{item.commentCount}}条回复&nbsp&nbsp</div>
+              <div @click="huifu(item.parentId,item.nickName,2)" style="color: #96e6dd;font-size: 15px;cursor:pointer">回复</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import {addComment} from "../services/comment";
+import {addComment, sendComment} from "../services/comment";
 import {deleteComment} from "../services/comment";
 import {getCommentListByArticleId} from "../services/comment";
 
 export default {
   name: "comment",
-  props: {
-    objectData: {
-      type: Object
-    },
-    required: true
-  },
+  // props: {
+  //   objectData: {
+  //     type: Object
+  //   },
+  //   required: true
+  // },
   data() {
     return {
-      comments: {
-      },
+      comments: {},
+      buttonText:'评论',
+      textToSend:'',
       article_id: this.$route.query.id,
-      blog_id: 0,
+      theId:0,
+      theNickName:'',
+      dd:0,
       replyForm: {}
     };
   },
@@ -56,6 +95,7 @@ export default {
           console.log(res);
           if (res.data.code === 200) {
             this.comments = res.data.data;
+            _this.makeCommentWork();
           }
           else {
             this.$message.error(res.data.msg)
@@ -68,9 +108,87 @@ export default {
       }
     },
 
+    huifu(id,nickName,jud){
+      if(this.dd == 0){
+        this.theId = id;
+        if(jud == 2) this.theNickName = nickName;
+        this.dd = 1;
+        this.buttonText = '回复';
+      }
+      else{
+        this.theId = 0;
+        this.theNickName = '';
+        this.dd = 0;
+        this.buttonText = '评论';
+      }
+    },
 
+    async send(){
+      let _this = this;
+      try {
+        await sendComment({
+          parentId: _this.theId,
+          content: _this.textToSend,
+          nickName: _this.$store.state.userMessage.name,
+          toWho: _this.theNickName,
+          articleId: _this.$route.query.id,
+          likeCount: 0,
+          commentCount: 0,
+        }).then(res=>{
+          if (res.data.code === 200) {
+            this.comments = res.data.data;
+          }
+          else {
+            this.$message.error(res.data.msg)
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      } finally {
 
-    huifu(){
+      }
+
+      //刷新数据
+      await _this.getComment();
+      _this.textToSend = '';
+      _this.dd = 0;
+      _this.buttonText = '评论';
+
+      if(_this.dd == 0) this.$message.info("评论成功");
+      else this.$message.info("回复成功");
+
+    },
+
+    makeCommentWork(){
+      let _this = this;
+      const arr = [];
+
+      //构造子数组：arr
+      _this.comments.forEach(function (item){
+        if(item.parentId){
+          arr.push(item);
+        }
+      });
+
+      // comments减去arr
+      var newArr = _this.comments.filter(function (obj1, index) {
+        return !arr.find(function (obj2) {
+          return obj1.id === obj2.id
+        })
+      })
+      _this.comments = newArr;
+
+      //将arr加在comments的子元素里
+      _this.comments.forEach(x=>{
+        x.children = [];
+        arr.forEach(y=>{
+          if(y.parentId == x.id){
+            x.children.push(y)
+          }
+        })
+      });
+
+      console.log(_this.comments)
 
     }
 
@@ -293,5 +411,29 @@ export default {
 .fatherInput .input-wrapper .btn-control .confirm {
   font-size: 16px;
 }
-
+.comment_input{
+  border-radius: 10px;
+  width: 700px;
+  margin-top: 3px;
+  background-color: #f0f0f0;
+  color: #2b2b2b;
+  border-style: none;
+  height: 45px;
+  padding-left: 20px;
+}
+.input_button{
+  border-radius: 8px;
+  background-color: #add5f7;
+  color: white;
+  font-size: 16px;
+  width: 70px;
+  height: 40px;
+  margin-top: 5px;
+  margin-left: 20px;
+  &:hover{
+    background-color: #71b8f5;
+    font-weight: bold;
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.3);
+  }
+}
 </style>

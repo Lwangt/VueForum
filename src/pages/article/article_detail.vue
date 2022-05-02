@@ -73,7 +73,7 @@
               <div class="item">版权声明：本博客所有文章除特别声明外,转载请注明出处!</div>
             </div>
 
-            <commentList :objectData="{...propsData}" />
+            <commentList />
 
           </el-card>
         </el-row>
@@ -109,10 +109,10 @@ export default {
   name: "article_detail",
   data() {
     return {
-      propsData: {
-        blog_id: 0,
-        page: 0
-      },
+      // propsData: {
+      //   blog_id: 0,
+      //   page: 0
+      // },
       blog: {
         blog_content:"# Redis学习总结\n" +
           "\n" +
