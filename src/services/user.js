@@ -8,3 +8,10 @@ export function getUserNameById (data) {
   })
 }
 
+export function disLikeArticle (data) {
+  return request({
+    method: 'POST',
+    url: '/user/disLikeArticle',
+    data,
+  })
+}

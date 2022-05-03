@@ -24,6 +24,14 @@ export function getArticleListByType (data) {
   })
 }
 
+export function getArticleByList (data) {
+  return request({
+    method: 'POST',
+    url: '/article/getArticleByList',
+    data,
+  })
+}
+
 export function getArticleListRandom (data) {
   return request({
     method: 'GET',

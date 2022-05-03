@@ -3,7 +3,7 @@
           <card/>
           <span class="right-title"> 人工智能</span>
 
-        <div v-for="item in articleList" :key="item.id" @click="goToPage(item.article_id)">
+        <div v-for="item in articleList" :key="item.id" @click="goToPage(item.articleId)">
           <contentText v-if="isReloadData" :title="item.title" :text="item.introduction" :num="item.likeNum" :readNum="item.readNum" :author="item.userName" :time="item.createTime"/>
         </div>
     </div>

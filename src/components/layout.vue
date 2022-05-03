@@ -159,6 +159,15 @@ export default {
     },
     userCenterClick(){
       //跳转到用户中心
+      let routeData = this.$router.resolve({
+        path: "/center",
+        query:{
+          id:this.$store.state.userMessage.id
+        }
+      });
+
+      //打开新页面
+      window.open(routeData.href, '_blank');
     },
     closePost(){
       console.log("xx")
