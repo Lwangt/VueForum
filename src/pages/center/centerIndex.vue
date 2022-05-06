@@ -5,7 +5,8 @@
     <div style="height: 65px;"></div>
    <div v-if="isReloadData"  class="flex align-items-center">
      <div class="ml40 flex" style="width: 600px;background-color: #ffffff;padding:20px;padding-left:30px;border-radius: 15px;  box-shadow: 0 14px 50px 0 rgba(128,128,128,0.18);">
-       <div style="width: 85px;height: 85px;border-radius: 15px;background-color: #1AC4D1;box-shadow: 0 8px 50px 0 rgba(0,0,0,0.18);"></div>
+       <div ref="headPlace" class="headP">
+       </div>
        <div class="ml30 mt2">
          <div class="c-title">{{thisUser.name}}</div>
          <div class="c-text">{{thisUser.intro}}</div>
@@ -20,13 +21,17 @@
        </div>
      </div>
      <div v-if="(isMine && isEdit)" class="flex" style="margin-left:140px;width: 600px;background-color: #ffffff;padding:20px;padding-left:30px;border-radius: 15px;  box-shadow: 0 14px 50px 0 rgba(128,128,128,0.18);">
-       <div style="width: 85px;height: 85px;border-radius: 15px;background-color: #1AC4D1;box-shadow: 0 8px 50px 0 rgba(0,0,0,0.18);"></div>
+       <div class="headP2 flex align-items-center justify-content-center" @click="headClick()" ref="headPlace2">
+        <i class="el-icon-user-solid"></i>
+       </div>
        <div class="ml30 mt2">
          <input class="title2" placeholder="新用户名" maxlength="12" v-model="form.name"></input>
          <input class="c-text2" style="width: 100%" placeholder="新个人简介" maxlength="20" v-model="form.intro"></input>
-         <div class="flex">
+         <div class="flex align-items-center">
+           <div class="fs14" style="color: #999999">性别：</div>
            <input class="c-bottom2" placeholder="新性别" maxlength="4" v-model="form.sex"></input>
-           <input class="c-bottom3" placeholder="新密码" maxlength="20" v-model="newPassword"></input>
+           <div class="fs14" style="color: #999999">新密码：</div>
+           <input class="c-bottom3" placeholder="########" maxlength="20" v-model="newPassword"></input>
          </div>
        </div>
      </div>
@@ -77,6 +82,11 @@
       </div>
     </div>
 
+
+    <my-dialog :is-show="isHeadDialog" @on-close="closeDialog('isHeadDialog')">
+      <HeadForm @close-dialog="closeDialog('isHeadDialog')" @chooseHead="changeHead" ></HeadForm>
+    </my-dialog>
+
   </div>
 
 
@@ -84,13 +94,18 @@
 
 <script>
 
+import Dialog from "../../components/base/dialog"
+import HeadForm from "../../components/dialog/headForm";
+import {addClass} from "../../utils/addClass"
 import {getUserLikeArticleListById} from "../../services/center";
 import {getArticleByList,getArticleListByAuthorId,deleteArticle} from "../../services/article";
 import {disLikeArticle,getUserById,editUser} from "../../services/user";
 import contentText from "../../components/contentText";
 export default {
   components:{
-    contentText
+    contentText,
+    MyDialog:Dialog,
+    HeadForm
   },
   data() {
     return {
@@ -104,7 +119,9 @@ export default {
       userMessage: this.$store.state.userMessage,
       thisUser:{},
       form:{},
-      newPassword:''
+      newPassword:'',
+      chooseHeadNum: null,
+      isHeadDialog:false
     };
   },
   methods: {
@@ -268,7 +285,9 @@ export default {
         })
       } catch (e) {
         console.log(e)
-      } finally { }
+      } finally {
+        _this.loadHead(1);
+      }
 
     },
 
@@ -281,6 +300,7 @@ export default {
             name: _this.form.name,
             intro: _this.form.intro,
             sex: _this.form.sex,
+            userImg: _this.chooseHeadNum.toString(),
             password: _this.newPassword
           }).then(res=>{
             if (res.data.code === 200) {
@@ -306,6 +326,7 @@ export default {
             name: _this.form.name,
             intro: _this.form.intro,
             sex: _this.form.sex,
+            userImg: _this.chooseHeadNum.toString(),
           }).then(res=>{
             if (res.data.code === 200) {
               this.$message.info("个人信息更新成功")
@@ -331,6 +352,23 @@ export default {
       if(this.id == this.userMessage.id) this.isMine = true;
     },
 
+    closeDialog(attr){
+      this[attr]=false
+    },
+
+    headClick(){
+      this.isHeadDialog=true
+    },
+
+    changeHead(headNum){
+
+      console.log("headNum" + headNum);
+      if(headNum!=0) {
+        this.chooseHeadNum = headNum;
+      }
+      this.loadHead(2);
+    },
+
     eedit(){
       //正在编辑 点击确定
       if(this.isEdit==true){
@@ -344,12 +382,29 @@ export default {
       }
     },
 
+    loadHead(n){
+      let num = null;
+      let item = null;
+      if(n == 1) {
+        item = this.$refs.headPlace;
+        num = this.thisUser.userImg;
+      }
+      else {
+        item = this.$refs.headPlace2;
+        num = this.chooseHeadNum;
+      }
+
+      let ss = 'head'+num.toString();
+      addClass(item,ss);
+    },
+
     reloadMethod(){
       this.isReloadData = false;
       this.judgeMine();
       this.getLikeArticleList();
       this.getMyArticle();
       this.getThisUser();
+      this.loadHead(1);
       this.$nextTick(()=>{
         this.isReloadData = true;
       })
@@ -488,4 +543,76 @@ export default {
 inpput :focus{
   border-style: none;
 }
+.headP{
+  width: 85px;
+  height: 85px;
+  border-radius: 50px;
+  box-shadow: 0 8px 50px 0 rgba(0, 0, 0, 0.28);
+}
+.headP2{
+  width: 85px;
+  height: 85px;
+  border-radius: 50px;
+  box-shadow: 0 8px 50px 0 rgba(0, 0, 0, 0.09);
+}
+.el-icon-user-solid{
+  color: #7acfde;
+  font-size: 42px;
+}
+
+
+.head1{
+  background: url(../../assets/head_images/1.png) no-repeat;
+  background-size:cover;
+}
+.head2{
+  background: url(../../assets/head_images/2.png) no-repeat;
+  background-size:cover;
+}
+.head3{
+  background: url(../../assets/head_images/3.png) no-repeat;
+  background-size:cover;
+}
+.head4{
+  background: url(../../assets/head_images/4.png) no-repeat;
+  background-size:cover;
+}
+.head5{
+  background: url(../../assets/head_images/5.png) no-repeat;
+  background-size:cover;
+}
+.head6{
+  background: url(../../assets/head_images/6.png) no-repeat;
+  background-size:cover;
+}
+.head7{
+  background: url(../../assets/head_images/7.png) no-repeat;
+  background-size:cover;
+}
+.head8{
+  background: url(../../assets/head_images/8.png) no-repeat;
+  background-size:cover;
+}
+.head9{
+  background: url(../../assets/head_images/9.png) no-repeat;
+  background-size:cover;
+}
+.head10{
+  background: url(../../assets/head_images/10.png) no-repeat;
+  background-size:cover;
+}
+.head11{
+  background: url(../../assets/head_images/11.png) no-repeat;
+  background-size:cover;
+}
+.head12{
+  background: url(../../assets/head_images/12.png) no-repeat;
+  background-size:cover;
+}
+.head13{
+  background: url(../../assets/head_images/13.png) no-repeat;
+  background-size:cover;
+}
+
+
 </style>
