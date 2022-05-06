@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <div class="c-title">{{name}}</div>
+        <div class="c-title" @click="gotoUserCenter(id)">{{name}}</div>
         <div class="c-text">{{intro}} </div>
         <div class="c-bottom">
             <i class="el-icon-star-on" ></i>
@@ -26,8 +26,22 @@ export default {
         'time',
         'sex',
         'likeNum',
-        'fanNum'
-    ]
+        'fanNum',
+        'id'
+    ],
+  methods:{
+    gotoUserCenter(idd){
+      let routeData = this.$router.resolve({
+        path: "/center",
+        query:{
+          id: idd
+        }
+      });
+
+      //打开新页面
+      window.open(routeData.href, '_blank');
+    }
+  }
 }
 </script>
 

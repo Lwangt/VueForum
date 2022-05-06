@@ -64,7 +64,7 @@
 
           <div v-else-if="isReloadData  && searchType == 3" class="search-page">
             <div v-for="(item,index) in searchResultList" :key="index">
-              <contentTextTwo :name="item.name" :intro="item.intro" :sex="item.sex" :likeNum="item.followAccount" :fanNum="item.fanAccount" :time="item.createTime"/>
+              <contentTextTwo :name="item.name" :intro="item.intro" :sex="item.sex" :likeNum="item.followAccount" :fanNum="item.fanAccount" :time="item.createTime" :id="item.id"/>
             </div>
             <div style="height: 100px;color: #d4d4d4;padding-left: 40px;padding-top: 80px;">(差不多到底啦……)</div>
           </div>

@@ -8,6 +8,14 @@ export function addArticle (data) {
   })
 }
 
+export function getArticleListByType (data) {
+  return request({
+    method: 'POST',
+    url: '/article/getArticleListByType',
+    data,
+  })
+}
+
 export function deleteArticle (data) {
   return request({
     method: 'POST',
@@ -16,10 +24,10 @@ export function deleteArticle (data) {
   })
 }
 
-export function getArticleListByType (data) {
+export function getArticleListByAuthorId (data) {
   return request({
     method: 'POST',
-    url: '/article/getArticleListByType',
+    url: '/article/getArticleListByAuthorId',
     data,
   })
 }
